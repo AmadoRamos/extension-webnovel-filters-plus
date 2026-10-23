@@ -5,7 +5,7 @@ function matches(book, f) {
 
   const tags = new Set((book.tagInfo || []).flatMap(t => [t.tagName, t.enTagName]).map(s => String(s).toLowerCase()));
   const has = tag => tags.has(tag.toLowerCase());
-  if (f.includeTags && !f.includeTags.every(has)) return false;
+  if (f.includeTags?.length && !(f.includeMode === 'any' ? f.includeTags.some(has) : f.includeTags.every(has))) return false;
   if (f.excludeTags && f.excludeTags.some(has)) return false;
 
   const text = `${book.bookName} ${book.description}`.toLowerCase();

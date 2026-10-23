@@ -13,7 +13,7 @@ panel.innerHTML = `
     <label>${t('maxChapters')} <input name="maxChapters" type="number" min="0"></label>
     <label>${t('minScore')} <input name="minScore" type="number" min="0" max="5" step="0.1"></label>
     <label>${t('publishedSince')} <input name="publishedAfter" type="date"></label>
-    <label>${t('withTags')} <input name="includeTags" list="wnf-include-tags" autocomplete="off" placeholder="magic, isekai"><datalist id="wnf-include-tags"></datalist></label>
+    <label><span class="wnf-row">${t('withTags')} <select name="includeMode" aria-label="${t('withTags')}"><option value="all">${t('tagsAll')}</option><option value="any">${t('tagsAny')}</option></select></span><input name="includeTags" list="wnf-include-tags" autocomplete="off" placeholder="magic, isekai"><datalist id="wnf-include-tags"></datalist></label>
     <label>${t('withoutTags')} <input name="excludeTags" list="wnf-exclude-tags" autocomplete="off" placeholder="r18, harem"><datalist id="wnf-exclude-tags"></datalist></label>
     <label>${t('withoutWords')} <input name="excludeWords" placeholder="naruto, pokemon"></label>
     <label>${t('maxPages')} <input name="maxPages" type="number" min="1" max="50" value="10"></label>
@@ -57,6 +57,7 @@ function readFilters() {
     minScore: num('minScore'),
     publishedAfter: raw.publishedAfter ? new Date(`${raw.publishedAfter}T00:00`).getTime() : null, // local midnight
     includeTags: list('includeTags'),
+    includeMode: raw.includeMode,
     excludeTags: list('excludeTags'),
     excludeWords: list('excludeWords'),
     maxPages: num('maxPages') || 10,

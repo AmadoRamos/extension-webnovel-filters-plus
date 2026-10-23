@@ -56,3 +56,13 @@ test('tagSuggestions completes only the last comma-separated tag, skipping ones 
   assert.deepEqual(tagSuggestions('magia, is', tags), ['magia, isekai', 'magia, sistema']);
   assert.deepEqual(tagSuggestions('magia,', tags), ['magia, isekai', 'magia, harén', 'magia, sistema']);
 });
+
+test('includeMode "any" accepts a book having at least one of the tags', () => {
+  assert.equal(matches(book, { includeTags: ['magic', 'romance'], includeMode: 'any' }), true);
+  assert.equal(matches(book, { includeTags: ['romance', 'harem'], includeMode: 'any' }), false);
+  assert.equal(matches(book, { includeTags: ['magic', 'romance'], includeMode: 'all' }), false);
+});
+
+test('an empty includeTags list never filters, whatever the mode', () => {
+  assert.equal(matches(book, { includeTags: [], includeMode: 'any' }), true);
+});

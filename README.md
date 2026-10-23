@@ -9,7 +9,7 @@ WebNovel only loads 20 books at a time, so the extension goes through the catego
 - Minimum and maximum chapters
 - Minimum score
 - Published on or after a date
-- Tags the book must have (all of them) and tags it must not have (any of them), in Spanish or English
+- Tags the book must have (all of them with AND, or at least one with OR) and tags it must not have (any of them), in Spanish or English
 - Words to exclude from the title or description
 
 The filters appear on the page, below "Sort By", and respect the status and sort order you have selected. Tags found while searching are saved to autocomplete the tag fields.
