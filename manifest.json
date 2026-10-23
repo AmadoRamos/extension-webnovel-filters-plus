@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "WebNovel Filtros+",
+  "version": "0.1.0",
+  "description": "Filtros extra para las categorías de webnovel.com: capítulos, score, tags, palabras y fecha.",
+  "content_scripts": [
+    {
+      "matches": ["https://www.webnovel.com/stories/*", "https://www.webnovel.com/*/stories/*"],
+      "js": ["filter.js", "content.js"],
+      "css": ["content.css"]
+    }
+  ]
+}

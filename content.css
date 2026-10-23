@@ -1,0 +1,25 @@
+#wnf-panel {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 99999;
+  width: min(380px, calc(100vw - 32px));
+  max-height: 80vh;
+  overflow: auto;
+  background: #fff;
+  color: #222;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .2);
+  font: 14px/1.4 sans-serif;
+  padding: 8px 12px;
+}
+#wnf-panel summary { cursor: pointer; font-weight: bold; }
+#wnf-panel form { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+#wnf-panel label { display: flex; flex-direction: column; font-size: 12px; }
+#wnf-panel input { padding: 4px; border: 1px solid #bbb; border-radius: 4px; }
+#wnf-panel button { grid-column: 1 / -1; padding: 6px; cursor: pointer; }
+#wnf-panel .wnf-results { padding-left: 0; list-style: none; }
+#wnf-panel li { display: grid; grid-template-columns: 40px 1fr; gap: 0 8px; margin: 6px 0; }
+#wnf-panel li img { grid-row: span 2; width: 40px; border-radius: 3px; }
+#wnf-panel li small { color: #666; }
