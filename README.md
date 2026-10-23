@@ -1,4 +1,6 @@
-# WebNovel Filters+
+# Filters+ for WebNovel
+
+Unofficial extension; not affiliated with or endorsed by WebNovel.
 
 Chrome/Brave extension that adds extra filters to [webnovel.com](https://www.webnovel.com) category pages (for example `/stories/fanfic-video-games`).
 

@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "WebNovel Filters+",
+  "name": "Filters+ for WebNovel",
   "version": "0.1.0",
   "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
   "permissions": ["storage"],
-  "description": "Extra filters for webnovel.com category pages: chapters, score, tags, words and date.",
+  "description": "Unofficial extra filters for webnovel.com categories: chapters, score, tags, words and date. Not affiliated with WebNovel.",
   "content_scripts": [
     {
       "matches": ["https://www.webnovel.com/stories/*", "https://www.webnovel.com/*/stories/*"],
