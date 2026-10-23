@@ -1,25 +1,12 @@
-#wnf-panel {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  z-index: 99999;
-  width: min(380px, calc(100vw - 32px));
-  max-height: 80vh;
-  overflow: auto;
-  background: #fff;
-  color: #222;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, .2);
-  font: 14px/1.4 sans-serif;
-  padding: 8px 12px;
-}
-#wnf-panel summary { cursor: pointer; font-weight: bold; }
-#wnf-panel form { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
-#wnf-panel label { display: flex; flex-direction: column; font-size: 12px; }
-#wnf-panel input { padding: 4px; border: 1px solid #bbb; border-radius: 4px; }
-#wnf-panel button { grid-column: 1 / -1; padding: 6px; cursor: pointer; }
-#wnf-panel .wnf-results { padding-left: 0; list-style: none; }
-#wnf-panel li { display: grid; grid-template-columns: 40px 1fr; gap: 0 8px; margin: 6px 0; }
-#wnf-panel li img { grid-row: span 2; width: 40px; border-radius: 3px; }
-#wnf-panel li small { color: #666; }
+#wnf-panel { margin-bottom: 16px; font-size: 14px; }
+#wnf-panel form { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px 12px; }
+#wnf-panel label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; }
+#wnf-panel input { padding: 6px 8px; border: 1px solid rgba(128, 128, 128, .4); border-radius: 8px; background: transparent; color: inherit; font: inherit; }
+#wnf-panel button { padding: 6px 16px; border: 0; border-radius: 16px; cursor: pointer; font: inherit; font-weight: 700; align-self: end; }
+#wnf-panel button[type=submit] { background: #3b66f5; color: #fff; }
+#wnf-panel button:disabled { opacity: .5; }
+#wnf-panel .wnf-results { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px 24px; padding: 0; list-style: none; }
+#wnf-panel li { display: grid; grid-template-columns: 60px 1fr; grid-template-rows: auto 1fr; gap: 4px 12px; }
+#wnf-panel li img { grid-row: span 2; width: 60px; border-radius: 4px; }
+#wnf-panel li a { font-weight: 700; color: inherit; }
+#wnf-panel li small { opacity: .7; }

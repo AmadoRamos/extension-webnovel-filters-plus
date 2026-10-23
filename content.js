@@ -1,7 +1,10 @@
-const panel = document.createElement('details');
+const siteForm = document.querySelector('form.j_filter_form');
+const hideSiteList = on => document.querySelector('.j_category_wrapper')?.toggleAttribute('hidden', on);
+
+const panel = document.createElement('section');
 panel.id = 'wnf-panel';
 panel.innerHTML = `
-  <summary>Filtros+</summary>
+  <div class="g_hr pt16 pb16 mb12"><h4 class="fw700 lh24 fs20 ls0.15 ell c_m">Filtros+</h4></div>
   <form>
     <label>Capítulos mín <input name="minChapters" type="number" min="0"></label>
     <label>Capítulos máx <input name="maxChapters" type="number" min="0"></label>
@@ -11,15 +14,17 @@ panel.innerHTML = `
     <label>Sin tags <input name="excludeTags" placeholder="r18, harem"></label>
     <label>Sin palabras <input name="excludeWords" placeholder="naruto, pokemon"></label>
     <label>Páginas a escanear <input name="maxPages" type="number" min="1" max="50" value="10"></label>
-    <button>Buscar</button>
+    <button type="submit">Buscar</button>
+    <button type="button" class="wnf-reset" hidden>Ver lista original</button>
   </form>
   <p class="wnf-status" aria-live="polite"></p>
   <ol class="wnf-results"></ol>`;
-document.body.append(panel);
+if (siteForm) siteForm.after(panel);
 
 const form = panel.querySelector('form');
 const status = panel.querySelector('.wnf-status');
 const results = panel.querySelector('.wnf-results');
+const reset = panel.querySelector('.wnf-reset');
 const STORE = 'wnf-filters';
 
 try {
@@ -52,7 +57,6 @@ function renderBook(b) {
   img.alt = '';
   const a = document.createElement('a');
   a.href = `/book/${b.bookId}`;
-  a.target = '_blank';
   a.textContent = b.bookName;
   const meta = document.createElement('small');
   meta.textContent = `${b.chapterNum} caps · ★${b.totalScore} · ${new Date(b.publishTime).toLocaleDateString()} · ${(b.tagInfo || []).map(t => t.tagName).join(', ')}`;
@@ -60,16 +64,24 @@ function renderBook(b) {
   return li;
 }
 
+function showOriginal() {
+  results.replaceChildren();
+  status.textContent = '';
+  reset.hidden = true;
+  hideSiteList(false);
+}
+reset.addEventListener('click', showOriginal);
+
 form.addEventListener('submit', async e => {
   e.preventDefault();
-  const siteForm = document.querySelector('form.j_filter_form');
-  if (!siteForm) return (status.textContent = 'No encontré los filtros de la categoría en esta página.');
   const token = (document.cookie.match(/_csrfToken=([^;]+)/) || [])[1];
   if (!token) return (status.textContent = 'Falta la cookie _csrfToken; recarga la página.');
   const filters = readFilters();
-  const button = form.querySelector('button');
+  const button = form.querySelector('[type=submit]');
   button.disabled = true;
-  results.replaceChildren();
+  showOriginal();
+  hideSiteList(true);
+  reset.hidden = false;
   let found = 0;
   try {
     for (let page = 1; page <= filters.maxPages; page++) {
