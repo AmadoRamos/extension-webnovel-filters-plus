@@ -5,8 +5,3 @@
 #wnf-panel button { padding: 6px 16px; border: 0; border-radius: 16px; cursor: pointer; font: inherit; font-weight: 700; align-self: end; }
 #wnf-panel button[type=submit] { background: #3b66f5; color: #fff; }
 #wnf-panel button:disabled { opacity: .5; }
-#wnf-panel .wnf-results { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px 24px; padding: 0; list-style: none; }
-#wnf-panel li { display: grid; grid-template-columns: 60px 1fr; grid-template-rows: auto 1fr; gap: 4px 12px; }
-#wnf-panel li img { grid-row: span 2; width: 60px; border-radius: 4px; }
-#wnf-panel li a { font-weight: 700; color: inherit; }
-#wnf-panel li small { opacity: .7; }

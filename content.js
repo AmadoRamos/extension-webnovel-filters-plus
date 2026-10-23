@@ -18,7 +18,7 @@ panel.innerHTML = `
     <button type="button" class="wnf-reset" hidden>Ver lista original</button>
   </form>
   <p class="wnf-status" aria-live="polite"></p>
-  <ol class="wnf-results"></ol>`;
+  <ul class="wnf-results clearfix" style="margin: 0 -20px;"></ul>`;
 if (siteForm) siteForm.after(panel);
 
 const form = panel.querySelector('form');
@@ -58,19 +58,41 @@ function readFilters() {
   };
 }
 
+// Results copy the markup of the site's own list items so its CSS styles them.
+const ICON_SCORE = '<svg viewBox="0 0 24 24" fill="none" class="mr4 fs16"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27z" fill="#000"></path></svg>';
+const ICON_CHAPTERS = '<svg viewBox="0 0 24 24" fill="none" class="mr4 fs16"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 2h10l6 6v14H4V2zm4 4h4v2H8V6zm8 6v-2H8v2h8z" fill="#000"></path></svg>';
+const ICON_ADD = '<svg viewBox="0 0 24 24" fill="none" class="fs16"><path d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10zm-11-1H6v2h5v5h2v-5h5v-2h-5V6h-2v5z" fill="#000"></path></svg>';
+const lang = location.pathname.match(/^\/[a-z]{2}(?=\/)/)?.[0] || '';
+const nativeItem = document.querySelector('.j_category_wrapper li');
+const nativeAdd = nativeItem?.querySelector('.j_add_to_library');
+const labels = { // reuse the page's own (translated) words
+  chapters: nativeItem?.querySelector('.ff_number:last-of-type span')?.textContent.replace(/^[\d.,\s]+/, '') || 'Chapters',
+  add: nativeAdd?.children[1]?.textContent || 'Add',
+  inLibrary: nativeAdd?.children[2]?.textContent || 'In Library',
+  addTitle: nativeAdd?.title || 'Add to library',
+};
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`);
+
 function renderBook(b) {
-  const li = document.createElement('li');
-  const img = document.createElement('img');
-  img.src = `//book-pic.webnovel.com/bookcover/${b.bookId}?imageMogr2/thumbnail/150x&imageId=${b.coverUpdateTime}`;
-  img.loading = 'lazy';
-  img.alt = '';
-  const a = document.createElement('a');
-  a.href = `/book/${b.bookId}`;
-  a.textContent = b.bookName;
-  const meta = document.createElement('small');
-  meta.textContent = `${b.chapterNum} caps · ★${b.totalScore} · ${new Date(b.publishTime).toLocaleDateString()} · ${(b.tagInfo || []).map(t => t.tagName).join(', ')}`;
-  li.append(img, a, meta);
-  return li;
+  const href = `${lang}/book/${esc(b.bookId)}`;
+  const name = esc(b.bookName);
+  const cover = `//book-pic.webnovel.com/bookcover/${esc(b.bookId)}?imageMogr2/thumbnail/150x&amp;imageId=${esc(b.coverUpdateTime)}`;
+  const kind = siteForm.elements.categoryType.value === '4' ? 'fanfic' : 'novel';
+  const tags = (b.tagInfo || []).map(t => {
+    const slug = String(t.enTagName).toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    return `<a class="fw600 lh16 fs12 ttu ls1 mr12 wsn" href="${lang}/tags/${esc(slug)}-${kind}" title="${esc(t.tagName)} Stories"># ${esc(t.tagName)}</a>`;
+  }).join('');
+  const score = b.totalScore > 0
+    ? `<strong class="c_m fs0 ff_number vam mr16">${ICON_SCORE}<span class="vam fw400 lh16 fs12">${esc(b.totalScore)}</span></strong>`
+    : '';
+  return `<li class="fl w50% bsbb pl20 pr20 pt8 pb8"><div class="pr" style="height: 120px; padding-left: 106px;">`
+    + `<span class="pa l0 t0" style="width: 90px;"><a href="${href}" class="g_thumb _auto" title="${name}"><img cross-origin="anonymous" class="_primary_theme_item" src="${cover}" data-original="${cover}" width="60" height="80" alt="${name}" loading="lazy" style="display: block;"></a></span>`
+    + `<p class="mb4 pt4 oh h16 mb8">${tags}</p>`
+    + `<h3 class="fw700 lh20 fs16 ls0.15 ell mb4"><a class="c_l" href="${href}" title="${name}">${name}</a></h3>`
+    + `<p class="fw400 lh20 fs14 ls0.2 c_l ells _2 mt4">${esc(b.description)}</p>`
+    + `<p class="df aic">${score}<strong class="c_m fs0 ff_number vam mr16">${ICON_CHAPTERS}<span class="vam fw400 lh16 fs12">${esc(b.chapterNum)} ${esc(labels.chapters)}</span></strong>`
+    + `<a class="bt _s _link fs0 j_add_to_library add_to_library _mini " data-report-uiname="library" data-report-did="${esc(b.bookId)}" data-bookid="${esc(b.bookId)}" data-noveltype="1" href="###" title="${esc(labels.addTitle)}">${ICON_ADD}<span class="vam fw600 lh16 fs12 ttu ls1">${esc(labels.add)}</span><span class="vam fs12 dn _add_library">${esc(labels.inLibrary)}</span></a></p>`
+    + `</div></li>`;
 }
 
 function showOriginal() {
@@ -103,7 +125,7 @@ form.addEventListener('submit', async e => {
       const { code, data } = await res.json();
       if (code !== 0) throw new Error(`code ${code}`);
       for (const b of data.items) for (const t of b.tagInfo || []) seen.add(String(t.tagName).toLowerCase());
-      for (const b of data.items.filter(b => matches(b, filters))) results.append(renderBook(b)), found++;
+      for (const b of data.items.filter(b => matches(b, filters))) results.insertAdjacentHTML('beforeend', renderBook(b)), found++;
       if (Number(data.isLast) === 1) break;
       await new Promise(r => setTimeout(r, 300)); // ponytail: fixed delay to be polite; tune if the site throttles
     }
