@@ -16,6 +16,7 @@ panel.innerHTML = `
     <label><span class="wnf-row">${t('withTags')} <select name="includeMode" aria-label="${t('withTags')}"><option value="all">${t('tagsAll')}</option><option value="any">${t('tagsAny')}</option></select></span><input name="includeTags" list="wnf-include-tags" autocomplete="off" placeholder="magic, isekai"><datalist id="wnf-include-tags"></datalist></label>
     <label>${t('withoutTags')} <input name="excludeTags" list="wnf-exclude-tags" autocomplete="off" placeholder="r18, harem"><datalist id="wnf-exclude-tags"></datalist></label>
     <label>${t('withoutWords')} <input name="excludeWords" placeholder="naruto, pokemon"></label>
+    <label>${t('withoutAuthors')} <input name="excludeAuthors" placeholder="author1, author2"></label>
     <label>${t('maxPages')} <input name="maxPages" type="number" min="1" max="50" value="10"></label>
     <button type="submit">${t('search')}</button>
     <button type="button" class="wnf-reset" hidden>${t('showOriginal')}</button>
@@ -60,6 +61,7 @@ function readFilters() {
     includeMode: raw.includeMode,
     excludeTags: list('excludeTags'),
     excludeWords: list('excludeWords'),
+    excludeAuthors: list('excludeAuthors'),
     maxPages: num('maxPages') || 10,
   };
 }

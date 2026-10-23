@@ -11,6 +11,8 @@ function matches(book, f) {
   const text = `${book.bookName} ${book.description}`.toLowerCase();
   if (f.excludeWords && f.excludeWords.some(w => text.includes(w.toLowerCase()))) return false;
   if (f.publishedAfter != null && book.publishTime < f.publishedAfter) return false;
+  const author = String(book.authorName ?? '').trim().toLowerCase();
+  if (f.excludeAuthors && f.excludeAuthors.some(a => a.toLowerCase() === author)) return false;
   return true;
 }
 

@@ -4,6 +4,7 @@ const { matches, tagSuggestions } = require('./filter.js');
 
 const book = {
   bookName: 'Genshin Impact : Mas allá del cielo falso',
+  authorName: 'Marshal_Madafaka',
   description: 'Un hombre joven atrapado en el juego gacha',
   chapterNum: 124,
   totalScore: 4.5,
@@ -65,4 +66,10 @@ test('includeMode "any" accepts a book having at least one of the tags', () => {
 
 test('an empty includeTags list never filters, whatever the mode', () => {
   assert.equal(matches(book, { includeTags: [], includeMode: 'any' }), true);
+});
+
+test('excludeAuthors hides books by those exact authors, ignoring case', () => {
+  assert.equal(matches(book, { excludeAuthors: ['someone_else'] }), true);
+  assert.equal(matches(book, { excludeAuthors: ['someone_else', 'marshal_madafaka'] }), false);
+  assert.equal(matches(book, { excludeAuthors: ['marshal'] }), true); // part of a name is not enough
 });
