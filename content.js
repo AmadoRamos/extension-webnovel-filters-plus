@@ -1,25 +1,28 @@
 const siteForm = document.querySelector('form.j_filter_form');
 const hideSiteList = on => document.querySelector('.j_category_wrapper')?.toggleAttribute('hidden', on);
 
+const ui = pageLanguage(location.pathname);
+const t = (key, vars) => translate(ui, key, vars);
+
 const panel = document.createElement('section');
 panel.id = 'wnf-panel';
 panel.innerHTML = `
-  <div class="g_hr pt16 pb16 mb12"><h4 class="fw700 lh24 fs20 ls0.15 ell c_m">Filters+</h4></div>
+  <div class="g_hr pt16 pb16 mb12"><h4 class="fw700 lh24 fs20 ls0.15 ell c_m">${t('title')}</h4></div>
   <form>
-    <label>Min chapters <input name="minChapters" type="number" min="0"></label>
-    <label>Max chapters <input name="maxChapters" type="number" min="0"></label>
-    <label>Min score <input name="minScore" type="number" min="0" max="5" step="0.1"></label>
-    <label>Published since <input name="publishedAfter" type="date"></label>
-    <label>With tags <input name="includeTags" list="wnf-include-tags" autocomplete="off" placeholder="magic, isekai"><datalist id="wnf-include-tags"></datalist></label>
-    <label>Without tags <input name="excludeTags" list="wnf-exclude-tags" autocomplete="off" placeholder="r18, harem"><datalist id="wnf-exclude-tags"></datalist></label>
-    <label>Without words <input name="excludeWords" placeholder="naruto, pokemon"></label>
-    <label>Max pages per batch <input name="maxPages" type="number" min="1" max="50" value="10"></label>
-    <button type="submit">Search</button>
-    <button type="button" class="wnf-reset" hidden>Show original list</button>
+    <label>${t('minChapters')} <input name="minChapters" type="number" min="0"></label>
+    <label>${t('maxChapters')} <input name="maxChapters" type="number" min="0"></label>
+    <label>${t('minScore')} <input name="minScore" type="number" min="0" max="5" step="0.1"></label>
+    <label>${t('publishedSince')} <input name="publishedAfter" type="date"></label>
+    <label>${t('withTags')} <input name="includeTags" list="wnf-include-tags" autocomplete="off" placeholder="magic, isekai"><datalist id="wnf-include-tags"></datalist></label>
+    <label>${t('withoutTags')} <input name="excludeTags" list="wnf-exclude-tags" autocomplete="off" placeholder="r18, harem"><datalist id="wnf-exclude-tags"></datalist></label>
+    <label>${t('withoutWords')} <input name="excludeWords" placeholder="naruto, pokemon"></label>
+    <label>${t('maxPages')} <input name="maxPages" type="number" min="1" max="50" value="10"></label>
+    <button type="submit">${t('search')}</button>
+    <button type="button" class="wnf-reset" hidden>${t('showOriginal')}</button>
   </form>
   <ul class="wnf-results clearfix" style="margin: 0 -20px;"></ul>
   <p class="wnf-status" aria-live="polite"></p>
-  <button type="button" class="wnf-more" hidden>Load more</button>`;
+  <button type="button" class="wnf-more" hidden>${t('loadMore')}</button>`;
 if (siteForm) siteForm.after(panel);
 
 const form = panel.querySelector('form');
@@ -64,7 +67,7 @@ function readFilters() {
 const ICON_SCORE = '<svg viewBox="0 0 24 24" fill="none" class="mr4 fs16"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27z" fill="#000"></path></svg>';
 const ICON_CHAPTERS = '<svg viewBox="0 0 24 24" fill="none" class="mr4 fs16"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 2h10l6 6v14H4V2zm4 4h4v2H8V6zm8 6v-2H8v2h8z" fill="#000"></path></svg>';
 const ICON_ADD = '<svg viewBox="0 0 24 24" fill="none" class="fs16"><path d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10zm-11-1H6v2h5v5h2v-5h5v-2h-5V6h-2v5z" fill="#000"></path></svg>';
-const lang = location.pathname.match(/^\/[a-z]{2}(?=\/)/)?.[0] || '';
+const lang = location.pathname.match(/^\/[a-z]{2,3}(?=\/)/)?.[0] || '';
 const nativeItem = document.querySelector('.j_category_wrapper li');
 const nativeAdd = nativeItem?.querySelector('.j_add_to_library');
 const labels = { // reuse the page's own (translated) words
@@ -115,15 +118,15 @@ async function loadMore() {
   const s = scan;
   if (!s || s.busy || s.done) return;
   const token = (document.cookie.match(/_csrfToken=([^;]+)/) || [])[1];
-  if (!token) return (status.textContent = 'Missing the _csrfToken cookie; reload the page.');
+  if (!token) return (status.textContent = t('noToken'));
   s.busy = true;
   more.disabled = true;
-  more.textContent = 'Searching…';
+  more.textContent = t('searching');
   const seen = new Set();
   let batchFound = 0;
   try {
     for (let i = 0; i < s.filters.maxPages && batchFound < BATCH && !s.done; i++, s.page++) {
-      status.textContent = `Page ${s.page}… ${s.found} found`;
+      status.textContent = t('progress', { page: s.page, found: s.found });
       s.params.set('_csrfToken', token);
       s.params.set('pageIndex', s.page);
       const res = await fetch(`/go/pcm/category/categoryAjax?${s.params}`, { headers: { 'x-requested-with': 'XMLHttpRequest' } });
@@ -138,15 +141,15 @@ async function loadMore() {
       s.done = Number(data.isLast) === 1;
       await new Promise(r => setTimeout(r, 300)); // ponytail: fixed delay to be polite; tune if the site throttles
     }
-    if (scan === s) status.textContent = s.done ? `Done: ${s.found} found.` : `${s.found} found (up to page ${s.page - 1}).`;
+    if (scan === s) status.textContent = s.done ? t('done', { found: s.found }) : t('partial', { found: s.found, page: s.page - 1 });
   } catch (err) {
-    if (scan === s) status.textContent = `Error: ${err.message} (${s.found} found so far)`;
+    if (scan === s) status.textContent = t('error', { error: err.message, found: s.found });
   } finally {
     s.busy = false;
     if (scan === s) {
       more.hidden = s.done;
       more.disabled = false;
-      more.textContent = 'Load more';
+      more.textContent = t('loadMore');
     }
     knownTags = [...new Set([...knownTags, ...seen])].sort();
     chrome.storage.local.set({ tags: knownTags });

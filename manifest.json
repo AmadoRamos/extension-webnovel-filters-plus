@@ -7,7 +7,7 @@
   "content_scripts": [
     {
       "matches": ["https://www.webnovel.com/stories/*", "https://www.webnovel.com/*/stories/*"],
-      "js": ["filter.js", "content.js"],
+      "js": ["filter.js", "i18n.js", "content.js"],
       "css": ["content.css"]
     }
   ]

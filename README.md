@@ -12,6 +12,8 @@ WebNovel only loads 20 books at a time, so the extension goes through the catego
 
 The filters appear on the page, below "Sort By", and respect the status and sort order you have selected. Tags found while searching are saved to autocomplete the tag fields.
 
+The extension's labels follow the page's language (English, Spanish, Portuguese, French, German, Indonesian, Malay, Italian, Japanese, Korean, Russian, Thai, Turkish, Vietnamese, Chinese and Filipino), falling back to English.
+
 ## Installation
 
 1. Download or clone this repository.
