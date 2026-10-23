@@ -13,18 +13,20 @@ panel.innerHTML = `
     <label>Con tags <input name="includeTags" list="wnf-include-tags" autocomplete="off" placeholder="magic, isekai"><datalist id="wnf-include-tags"></datalist></label>
     <label>Sin tags <input name="excludeTags" list="wnf-exclude-tags" autocomplete="off" placeholder="r18, harem"><datalist id="wnf-exclude-tags"></datalist></label>
     <label>Sin palabras <input name="excludeWords" placeholder="naruto, pokemon"></label>
-    <label>Páginas a escanear <input name="maxPages" type="number" min="1" max="50" value="10"></label>
+    <label>Máx. páginas por tanda <input name="maxPages" type="number" min="1" max="50" value="10"></label>
     <button type="submit">Buscar</button>
     <button type="button" class="wnf-reset" hidden>Ver lista original</button>
   </form>
+  <ul class="wnf-results clearfix" style="margin: 0 -20px;"></ul>
   <p class="wnf-status" aria-live="polite"></p>
-  <ul class="wnf-results clearfix" style="margin: 0 -20px;"></ul>`;
+  <button type="button" class="wnf-more" hidden>Cargar más</button>`;
 if (siteForm) siteForm.after(panel);
 
 const form = panel.querySelector('form');
 const status = panel.querySelector('.wnf-status');
 const results = panel.querySelector('.wnf-results');
 const reset = panel.querySelector('.wnf-reset');
+const more = panel.querySelector('.wnf-more');
 const STORE = 'wnf-filters';
 
 try {
@@ -95,46 +97,71 @@ function renderBook(b) {
     + `</div></li>`;
 }
 
+// Like the site's own list, results load in batches: the next one starts when the "Cargar más" button scrolls into view.
+const BATCH = 20; // matches per batch, one site page's worth
+let scan = null; // { params, filters, page, found, done, busy }
+
 function showOriginal() {
+  scan = null;
   results.replaceChildren();
   status.textContent = '';
   reset.hidden = true;
+  more.hidden = true;
   hideSiteList(false);
 }
 reset.addEventListener('click', showOriginal);
 
-form.addEventListener('submit', async e => {
-  e.preventDefault();
+async function loadMore() {
+  const s = scan;
+  if (!s || s.busy || s.done) return;
   const token = (document.cookie.match(/_csrfToken=([^;]+)/) || [])[1];
   if (!token) return (status.textContent = 'Falta la cookie _csrfToken; recarga la página.');
-  const filters = readFilters();
-  const button = form.querySelector('[type=submit]');
-  button.disabled = true;
-  showOriginal();
-  hideSiteList(true);
-  reset.hidden = false;
-  let found = 0;
+  s.busy = true;
+  more.disabled = true;
+  more.textContent = 'Buscando…';
   const seen = new Set();
+  let batchFound = 0;
   try {
-    for (let page = 1; page <= filters.maxPages; page++) {
-      status.textContent = `Página ${page}/${filters.maxPages}… ${found} encontradas`;
-      const params = new URLSearchParams(new FormData(siteForm));
-      params.set('_csrfToken', token);
-      params.set('pageIndex', page);
-      const res = await fetch(`/go/pcm/category/categoryAjax?${params}`, { headers: { 'x-requested-with': 'XMLHttpRequest' } });
+    for (let i = 0; i < s.filters.maxPages && batchFound < BATCH && !s.done; i++, s.page++) {
+      status.textContent = `Página ${s.page}… ${s.found} encontradas`;
+      s.params.set('_csrfToken', token);
+      s.params.set('pageIndex', s.page);
+      const res = await fetch(`/go/pcm/category/categoryAjax?${s.params}`, { headers: { 'x-requested-with': 'XMLHttpRequest' } });
       const { code, data } = await res.json();
+      if (scan !== s) return; // a new search replaced this one
       if (code !== 0) throw new Error(`code ${code}`);
       for (const b of data.items) for (const t of b.tagInfo || []) seen.add(String(t.tagName).toLowerCase());
-      for (const b of data.items.filter(b => matches(b, filters))) results.insertAdjacentHTML('beforeend', renderBook(b)), found++;
-      if (Number(data.isLast) === 1) break;
+      const hits = data.items.filter(b => matches(b, s.filters));
+      results.insertAdjacentHTML('beforeend', hits.map(renderBook).join(''));
+      batchFound += hits.length;
+      s.found += hits.length;
+      s.done = Number(data.isLast) === 1;
       await new Promise(r => setTimeout(r, 300)); // ponytail: fixed delay to be polite; tune if the site throttles
     }
-    status.textContent = `Listo: ${found} encontradas.`;
+    if (scan === s) status.textContent = s.done ? `Fin: ${s.found} encontradas.` : `${s.found} encontradas (hasta la página ${s.page - 1}).`;
   } catch (err) {
-    status.textContent = `Error: ${err.message} (${found} encontradas hasta ahora)`;
+    if (scan === s) status.textContent = `Error: ${err.message} (${s.found} encontradas hasta ahora)`;
   } finally {
-    button.disabled = false;
+    s.busy = false;
+    if (scan === s) {
+      more.hidden = s.done;
+      more.disabled = false;
+      more.textContent = 'Cargar más';
+    }
     knownTags = [...new Set([...knownTags, ...seen])].sort();
     chrome.storage.local.set({ tags: knownTags });
   }
+}
+
+new IntersectionObserver(entries => entries[0].isIntersecting && loadMore()).observe(more);
+more.addEventListener('click', loadMore);
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  showOriginal();
+  hideSiteList(true);
+  reset.hidden = false;
+  more.hidden = false; // visible from the start so finishing a batch never counts as "scrolled into view"
+  scan = { params: new URLSearchParams(new FormData(siteForm)), filters: readFilters(), page: 1, found: 0, done: false, busy: false };
+  loadMore();
 });

@@ -2,7 +2,7 @@
 
 Extensión para Chrome/Brave que agrega filtros extra a las páginas de categorías de [webnovel.com](https://www.webnovel.com) (por ejemplo `/stories/fanfic-video-games`).
 
-WebNovel solo carga 20 libros a la vez, así que la extensión recorre varias páginas de la categoría y muestra solo los que cumplen tus filtros:
+WebNovel solo carga 20 libros a la vez, así que la extensión recorre las páginas de la categoría y muestra solo los que cumplen tus filtros. Igual que la lista original, carga por tandas: al llegar al final de los resultados busca en las páginas siguientes (o pulsa **Cargar más**). Filtros disponibles:
 
 - Capítulos mínimos y máximos
 - Score mínimo
