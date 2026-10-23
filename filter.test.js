@@ -1,10 +1,12 @@
 const test = require('node:test');
 const assert = require('node:assert');
-const { matches, tagSuggestions } = require('./filter.js');
+const { matches, listSuggestions } = require('./filter.js');
 
 const book = {
   bookName: 'Genshin Impact : Mas allá del cielo falso',
   authorName: 'Marshal_Madafaka',
+  categoryName: 'Videojuegos',
+  inLibrary: 0,
   description: 'Un hombre joven atrapado en el juego gacha',
   chapterNum: 124,
   totalScore: 4.5,
@@ -51,11 +53,11 @@ test('publishedAfter rejects older books', () => {
   assert.equal(matches(book, { publishedAfter: Date.UTC(2026, 6, 1) }), false);
 });
 
-test('tagSuggestions completes only the last comma-separated tag, skipping ones already typed', () => {
+test('listSuggestions completes only the last comma-separated name, skipping ones already typed', () => {
   const tags = ['magia', 'isekai', 'harén', 'sistema'];
-  assert.deepEqual(tagSuggestions('', tags), ['magia', 'isekai', 'harén', 'sistema']);
-  assert.deepEqual(tagSuggestions('magia, is', tags), ['magia, isekai', 'magia, sistema']);
-  assert.deepEqual(tagSuggestions('magia,', tags), ['magia, isekai', 'magia, harén', 'magia, sistema']);
+  assert.deepEqual(listSuggestions('', tags), ['magia', 'isekai', 'harén', 'sistema']);
+  assert.deepEqual(listSuggestions('magia, is', tags), ['magia, isekai', 'magia, sistema']);
+  assert.deepEqual(listSuggestions('magia,', tags), ['magia, isekai', 'magia, harén', 'magia, sistema']);
 });
 
 test('includeMode "any" accepts a book having at least one of the tags', () => {
@@ -72,4 +74,18 @@ test('excludeAuthors hides books by those exact authors, ignoring case', () => {
   assert.equal(matches(book, { excludeAuthors: ['someone_else'] }), true);
   assert.equal(matches(book, { excludeAuthors: ['someone_else', 'marshal_madafaka'] }), false);
   assert.equal(matches(book, { excludeAuthors: ['marshal'] }), true); // part of a name is not enough
+});
+
+test('hideInLibrary hides books already in the library', () => {
+  assert.equal(matches(book, { hideInLibrary: true }), true);
+  assert.equal(matches({ ...book, inLibrary: 1 }, { hideInLibrary: true }), false);
+  assert.equal(matches({ ...book, inLibrary: 1 }, {}), true);
+});
+
+test('includeCategories keeps only those categories, excludeCategories hides them, both exact and ignoring case', () => {
+  assert.equal(matches(book, { includeCategories: ['anime y cómics', 'videojuegos'] }), true);
+  assert.equal(matches(book, { includeCategories: ['tv'] }), false);
+  assert.equal(matches(book, { includeCategories: [] }), true);
+  assert.equal(matches(book, { excludeCategories: ['VIDEOJUEGOS'] }), false);
+  assert.equal(matches(book, { excludeCategories: ['video'] }), true);
 });

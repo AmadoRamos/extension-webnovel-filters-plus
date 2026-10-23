@@ -13,10 +13,13 @@ panel.innerHTML = `
     <label>${t('maxChapters')} <input name="maxChapters" type="number" min="0"></label>
     <label>${t('minScore')} <input name="minScore" type="number" min="0" max="5" step="0.1"></label>
     <label>${t('publishedSince')} <input name="publishedAfter" type="date"></label>
-    <label><span class="wnf-row">${t('withTags')} <select name="includeMode" aria-label="${t('withTags')}"><option value="all">${t('tagsAll')}</option><option value="any">${t('tagsAny')}</option></select></span><input name="includeTags" list="wnf-include-tags" autocomplete="off" placeholder="magic, isekai"><datalist id="wnf-include-tags"></datalist></label>
-    <label>${t('withoutTags')} <input name="excludeTags" list="wnf-exclude-tags" autocomplete="off" placeholder="r18, harem"><datalist id="wnf-exclude-tags"></datalist></label>
+    <label><span class="wnf-row">${t('withTags')} <select name="includeMode" aria-label="${t('withTags')}"><option value="all">${t('tagsAll')}</option><option value="any">${t('tagsAny')}</option></select></span><input name="includeTags" placeholder="magic, isekai"></label>
+    <label>${t('withoutTags')} <input name="excludeTags" placeholder="r18, harem"></label>
     <label>${t('withoutWords')} <input name="excludeWords" placeholder="naruto, pokemon"></label>
     <label>${t('withoutAuthors')} <input name="excludeAuthors" placeholder="author1, author2"></label>
+    <label>${t('onlyCategories')} <input name="includeCategories"></label>
+    <label>${t('withoutCategories')} <input name="excludeCategories"></label>
+    <label class="wnf-check"><input name="hideInLibrary" type="checkbox"> ${t('hideInLibrary')}</label>
     <label>${t('maxPages')} <input name="maxPages" type="number" min="1" max="50" value="10"></label>
     <button type="submit">${t('search')}</button>
     <button type="button" class="wnf-reset" hidden>${t('showOriginal')}</button>
@@ -35,14 +38,25 @@ const STORE = 'wnf-filters';
 
 try {
   const saved = JSON.parse(localStorage.getItem(STORE) || '{}');
-  for (const [k, v] of Object.entries(saved)) if (form.elements[k]) form.elements[k].value = v;
+  for (const [k, v] of Object.entries(saved)) {
+    const el = form.elements[k];
+    if (el?.type === 'checkbox') el.checked = true; // FormData only saves checked boxes
+    else if (el) el.value = v;
+  }
 } catch {}
 
-// Every tag seen while scanning is kept in extension storage to feed the tag autocomplete.
-let knownTags = [];
-chrome.storage.local.get('tags').then(r => (knownTags = r.tags || []));
-for (const input of [form.elements.includeTags, form.elements.excludeTags]) {
-  const fill = () => input.list.replaceChildren(...tagSuggestions(input.value, knownTags).slice(0, 50).map(v => new Option(v)));
+// Every tag, author and category seen while scanning is kept in extension storage to feed the autocomplete.
+const known = { tags: [], authors: [], categories: [] };
+chrome.storage.local.get(Object.keys(known)).then(r => { for (const k in known) known[k] = r[k] || []; });
+const SUGGEST = { includeTags: 'tags', excludeTags: 'tags', excludeAuthors: 'authors', includeCategories: 'categories', excludeCategories: 'categories' };
+for (const [name, kind] of Object.entries(SUGGEST)) {
+  const input = form.elements[name];
+  const datalist = document.createElement('datalist');
+  datalist.id = `wnf-list-${name}`;
+  input.after(datalist);
+  input.setAttribute('list', datalist.id);
+  input.autocomplete = 'off';
+  const fill = () => datalist.replaceChildren(...listSuggestions(input.value, known[kind]).slice(0, 50).map(v => new Option(v)));
   input.addEventListener('input', fill);
   input.addEventListener('focus', fill);
 }
@@ -62,6 +76,9 @@ function readFilters() {
     excludeTags: list('excludeTags'),
     excludeWords: list('excludeWords'),
     excludeAuthors: list('excludeAuthors'),
+    includeCategories: list('includeCategories'),
+    excludeCategories: list('excludeCategories'),
+    hideInLibrary: raw.hideInLibrary === 'on',
     maxPages: num('maxPages') || 10,
   };
 }
@@ -125,7 +142,8 @@ async function loadMore() {
   s.busy = true;
   more.disabled = true;
   more.textContent = t('searching');
-  const seen = new Set();
+  const seen = { tags: new Set(), authors: new Set(), categories: new Set() };
+  const lower = v => String(v).trim().toLowerCase();
   let batchFound = 0;
   try {
     for (let i = 0; i < s.filters.maxPages && batchFound < BATCH && !s.done; i++, s.page++) {
@@ -136,7 +154,11 @@ async function loadMore() {
       const { code, data } = await res.json();
       if (scan !== s) return; // a new search replaced this one
       if (code !== 0) throw new Error(`code ${code}`);
-      for (const b of data.items) for (const t of b.tagInfo || []) seen.add(String(t.tagName).toLowerCase());
+      for (const b of data.items) {
+        for (const tag of b.tagInfo || []) seen.tags.add(lower(tag.tagName));
+        if (b.authorName) seen.authors.add(lower(b.authorName));
+        if (b.categoryName) seen.categories.add(lower(b.categoryName));
+      }
       const hits = data.items.filter(b => matches(b, s.filters));
       results.insertAdjacentHTML('beforeend', hits.map(renderBook).join(''));
       batchFound += hits.length;
@@ -154,8 +176,8 @@ async function loadMore() {
       more.disabled = false;
       more.textContent = t('loadMore');
     }
-    knownTags = [...new Set([...knownTags, ...seen])].sort();
-    chrome.storage.local.set({ tags: knownTags });
+    for (const k in known) known[k] = [...new Set([...known[k], ...seen[k]])].sort();
+    chrome.storage.local.set(known);
   }
 }
 

@@ -1,3 +1,6 @@
+// Whole-name comparison (authors, categories): a partial name must not match someone else.
+const hasName = (names, value) => names.some(n => n.trim().toLowerCase() === String(value ?? '').trim().toLowerCase());
+
 function matches(book, f) {
   if (f.minChapters != null && book.chapterNum < f.minChapters) return false;
   if (f.maxChapters != null && book.chapterNum > f.maxChapters) return false;
@@ -11,18 +14,20 @@ function matches(book, f) {
   const text = `${book.bookName} ${book.description}`.toLowerCase();
   if (f.excludeWords && f.excludeWords.some(w => text.includes(w.toLowerCase()))) return false;
   if (f.publishedAfter != null && book.publishTime < f.publishedAfter) return false;
-  const author = String(book.authorName ?? '').trim().toLowerCase();
-  if (f.excludeAuthors && f.excludeAuthors.some(a => a.toLowerCase() === author)) return false;
+  if (f.excludeAuthors && hasName(f.excludeAuthors, book.authorName)) return false;
+  if (f.includeCategories?.length && !hasName(f.includeCategories, book.categoryName)) return false;
+  if (f.excludeCategories && hasName(f.excludeCategories, book.categoryName)) return false;
+  if (f.hideInLibrary && Number(book.inLibrary)) return false;
   return true;
 }
 
-// Datalist options for a comma-separated tag input: complete the last tag, keep the earlier ones.
-function tagSuggestions(value, tags) {
+// Datalist options for a comma-separated input (tags, authors, categories): complete the last name, keep the earlier ones.
+function listSuggestions(value, names) {
   const parts = value.split(',').map(s => s.trim());
   const typed = parts.pop().toLowerCase();
   const prefix = parts.filter(Boolean).map(t => `${t}, `).join('');
   const done = new Set(parts.map(t => t.toLowerCase()));
-  return tags.filter(t => !done.has(t) && t.includes(typed)).map(t => prefix + t);
+  return names.filter(n => !done.has(n) && n.includes(typed)).map(n => prefix + n);
 }
 
-if (typeof module !== 'undefined') module.exports = { matches, tagSuggestions };
+if (typeof module !== 'undefined') module.exports = { matches, listSuggestions };

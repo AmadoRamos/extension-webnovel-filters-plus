@@ -4,6 +4,7 @@
 #wnf-panel .wnf-row { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
 #wnf-panel .wnf-row select { height: auto; flex: none; padding: 0; border: 0; font-size: 12px; line-height: 16px; font-weight: 700; color: #3b66f5; cursor: pointer; }
 #wnf-panel input, #wnf-panel select { padding: 6px 8px; border: 1px solid rgba(128, 128, 128, .4); border-radius: 8px; background: transparent; color: inherit; font: inherit; }
+#wnf-panel .wnf-check { flex-direction: row; align-items: center; align-self: end; gap: 6px; padding-bottom: 8px; }
 #wnf-panel button { padding: 6px 16px; border: 0; border-radius: 16px; cursor: pointer; font: inherit; font-weight: 700; align-self: end; }
 #wnf-panel button[type=submit] { background: #3b66f5; color: #fff; }
 #wnf-panel button:disabled { opacity: .5; }

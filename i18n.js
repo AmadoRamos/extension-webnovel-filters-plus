@@ -3,6 +3,7 @@ const I18N = {
   en: {
     title: 'Filters+', minChapters: 'Min chapters', maxChapters: 'Max chapters', minScore: 'Min score',
     publishedSince: 'Published since', withTags: 'With tags', tagsAll: 'All (AND)', tagsAny: 'Any (OR)', withoutTags: 'Without tags', withoutWords: 'Without words', withoutAuthors: 'Without authors',
+    onlyCategories: 'Only categories', withoutCategories: 'Without categories', hideInLibrary: 'Hide books in my library',
     maxPages: 'Max pages per batch', search: 'Search', showOriginal: 'Show original list', loadMore: 'Load more',
     searching: 'Searching…', noToken: 'Missing the _csrfToken cookie; reload the page.',
     progress: 'Page {page}… {found} found', partial: '{found} found (up to page {page}).',
@@ -11,6 +12,7 @@ const I18N = {
   es: {
     title: 'Filtros+', minChapters: 'Capítulos mín.', maxChapters: 'Capítulos máx.', minScore: 'Score mín.',
     publishedSince: 'Publicado desde', withTags: 'Con tags', tagsAll: 'Todas (AND)', tagsAny: 'Alguna (OR)', withoutTags: 'Sin tags', withoutWords: 'Sin palabras', withoutAuthors: 'Sin autores',
+    onlyCategories: 'Solo categorías', withoutCategories: 'Sin categorías', hideInLibrary: 'Ocultar los de mi biblioteca',
     maxPages: 'Máx. páginas por tanda', search: 'Buscar', showOriginal: 'Ver lista original', loadMore: 'Cargar más',
     searching: 'Buscando…', noToken: 'Falta la cookie _csrfToken; recarga la página.',
     progress: 'Página {page}… {found} encontradas', partial: '{found} encontradas (hasta la página {page}).',
@@ -19,6 +21,7 @@ const I18N = {
   pt: {
     title: 'Filtros+', minChapters: 'Capítulos mín.', maxChapters: 'Capítulos máx.', minScore: 'Nota mín.',
     publishedSince: 'Publicado desde', withTags: 'Com tags', tagsAll: 'Todas (AND)', tagsAny: 'Alguma (OR)', withoutTags: 'Sem tags', withoutWords: 'Sem palavras', withoutAuthors: 'Sem autores',
+    onlyCategories: 'Só categorias', withoutCategories: 'Sem categorias', hideInLibrary: 'Ocultar os da minha biblioteca',
     maxPages: 'Máx. páginas por lote', search: 'Buscar', showOriginal: 'Ver lista original', loadMore: 'Carregar mais',
     searching: 'Buscando…', noToken: 'Falta o cookie _csrfToken; recarregue a página.',
     progress: 'Página {page}… {found} encontrados', partial: '{found} encontrados (até a página {page}).',
@@ -27,6 +30,7 @@ const I18N = {
   fr: {
     title: 'Filtres+', minChapters: 'Chapitres min.', maxChapters: 'Chapitres max.', minScore: 'Note min.',
     publishedSince: 'Publié depuis', withTags: 'Avec tags', tagsAll: 'Toutes (AND)', tagsAny: 'Au moins une (OR)', withoutTags: 'Sans tags', withoutWords: 'Sans mots', withoutAuthors: 'Sans auteurs',
+    onlyCategories: 'Seulement catégories', withoutCategories: 'Sans catégories', hideInLibrary: 'Masquer ceux de ma bibliothèque',
     maxPages: 'Pages max. par lot', search: 'Rechercher', showOriginal: 'Voir la liste d\'origine', loadMore: 'Charger plus',
     searching: 'Recherche…', noToken: 'Cookie _csrfToken manquant ; rechargez la page.',
     progress: 'Page {page}… {found} trouvés', partial: '{found} trouvés (jusqu\'à la page {page}).',
@@ -35,6 +39,7 @@ const I18N = {
   de: {
     title: 'Filter+', minChapters: 'Min. Kapitel', maxChapters: 'Max. Kapitel', minScore: 'Min. Bewertung',
     publishedSince: 'Veröffentlicht seit', withTags: 'Mit Tags', tagsAll: 'Alle (AND)', tagsAny: 'Mindestens eine (OR)', withoutTags: 'Ohne Tags', withoutWords: 'Ohne Wörter', withoutAuthors: 'Ohne Autoren',
+    onlyCategories: 'Nur Kategorien', withoutCategories: 'Ohne Kategorien', hideInLibrary: 'Bücher in meiner Bibliothek ausblenden',
     maxPages: 'Max. Seiten pro Durchgang', search: 'Suchen', showOriginal: 'Originalliste anzeigen', loadMore: 'Mehr laden',
     searching: 'Suche…', noToken: 'Cookie _csrfToken fehlt; Seite neu laden.',
     progress: 'Seite {page}… {found} gefunden', partial: '{found} gefunden (bis Seite {page}).',
@@ -43,6 +48,7 @@ const I18N = {
   id: {
     title: 'Filter+', minChapters: 'Bab min.', maxChapters: 'Bab maks.', minScore: 'Skor min.',
     publishedSince: 'Terbit sejak', withTags: 'Dengan tag', tagsAll: 'Semua (AND)', tagsAny: 'Salah satu (OR)', withoutTags: 'Tanpa tag', withoutWords: 'Tanpa kata', withoutAuthors: 'Tanpa penulis',
+    onlyCategories: 'Hanya kategori', withoutCategories: 'Tanpa kategori', hideInLibrary: 'Sembunyikan yang ada di pustaka saya',
     maxPages: 'Maks. halaman per kelompok', search: 'Cari', showOriginal: 'Lihat daftar asli', loadMore: 'Muat lebih banyak',
     searching: 'Mencari…', noToken: 'Cookie _csrfToken tidak ada; muat ulang halaman.',
     progress: 'Halaman {page}… {found} ditemukan', partial: '{found} ditemukan (sampai halaman {page}).',
@@ -51,6 +57,7 @@ const I18N = {
   ms: {
     title: 'Penapis+', minChapters: 'Bab min.', maxChapters: 'Bab maks.', minScore: 'Skor min.',
     publishedSince: 'Diterbitkan sejak', withTags: 'Dengan tag', tagsAll: 'Semua (AND)', tagsAny: 'Salah satu (OR)', withoutTags: 'Tanpa tag', withoutWords: 'Tanpa perkataan', withoutAuthors: 'Tanpa pengarang',
+    onlyCategories: 'Kategori sahaja', withoutCategories: 'Tanpa kategori', hideInLibrary: 'Sembunyikan yang ada dalam perpustakaan saya',
     maxPages: 'Maks. halaman setiap kumpulan', search: 'Cari', showOriginal: 'Lihat senarai asal', loadMore: 'Muat lagi',
     searching: 'Mencari…', noToken: 'Kuki _csrfToken tiada; muat semula halaman.',
     progress: 'Halaman {page}… {found} dijumpai', partial: '{found} dijumpai (sehingga halaman {page}).',
@@ -59,6 +66,7 @@ const I18N = {
   it: {
     title: 'Filtri+', minChapters: 'Capitoli min.', maxChapters: 'Capitoli max.', minScore: 'Voto min.',
     publishedSince: 'Pubblicato dal', withTags: 'Con tag', tagsAll: 'Tutti (AND)', tagsAny: 'Almeno uno (OR)', withoutTags: 'Senza tag', withoutWords: 'Senza parole', withoutAuthors: 'Senza autori',
+    onlyCategories: 'Solo categorie', withoutCategories: 'Senza categorie', hideInLibrary: 'Nascondi quelli nella mia libreria',
     maxPages: 'Max pagine per blocco', search: 'Cerca', showOriginal: 'Mostra elenco originale', loadMore: 'Carica altri',
     searching: 'Ricerca…', noToken: 'Manca il cookie _csrfToken; ricarica la pagina.',
     progress: 'Pagina {page}… {found} trovati', partial: '{found} trovati (fino alla pagina {page}).',
@@ -67,6 +75,7 @@ const I18N = {
   ja: {
     title: 'フィルター+', minChapters: '最小話数', maxChapters: '最大話数', minScore: '最低評価',
     publishedSince: '公開日以降', withTags: '含むタグ', tagsAll: 'すべて (AND)', tagsAny: 'いずれか (OR)', withoutTags: '除外タグ', withoutWords: '除外ワード', withoutAuthors: '除外する作者',
+    onlyCategories: '対象カテゴリー', withoutCategories: '除外カテゴリー', hideInLibrary: 'ライブラリにある作品を隠す',
     maxPages: '1回あたりの最大ページ数', search: '検索', showOriginal: '元のリストを表示', loadMore: 'さらに読み込む',
     searching: '検索中…', noToken: '_csrfToken クッキーがありません。ページを再読み込みしてください。',
     progress: '{page} ページ目… {found} 件', partial: '{found} 件（{page} ページまで）',
@@ -75,6 +84,7 @@ const I18N = {
   ko: {
     title: '필터+', minChapters: '최소 회차', maxChapters: '최대 회차', minScore: '최소 평점',
     publishedSince: '게시일 이후', withTags: '포함 태그', tagsAll: '모두 (AND)', tagsAny: '하나 이상 (OR)', withoutTags: '제외 태그', withoutWords: '제외 단어', withoutAuthors: '제외할 작가',
+    onlyCategories: '포함 카테고리', withoutCategories: '제외 카테고리', hideInLibrary: '내 서재에 있는 작품 숨기기',
     maxPages: '회당 최대 페이지', search: '검색', showOriginal: '원래 목록 보기', loadMore: '더 보기',
     searching: '검색 중…', noToken: '_csrfToken 쿠키가 없습니다. 페이지를 새로고침하세요.',
     progress: '{page}페이지… {found}개 찾음', partial: '{found}개 찾음 ({page}페이지까지).',
@@ -83,6 +93,7 @@ const I18N = {
   ru: {
     title: 'Фильтры+', minChapters: 'Мин. глав', maxChapters: 'Макс. глав', minScore: 'Мин. оценка',
     publishedSince: 'Опубликовано с', withTags: 'С тегами', tagsAll: 'Все (AND)', tagsAny: 'Любой (OR)', withoutTags: 'Без тегов', withoutWords: 'Без слов', withoutAuthors: 'Без авторов',
+    onlyCategories: 'Только категории', withoutCategories: 'Без категорий', hideInLibrary: 'Скрыть книги из моей библиотеки',
     maxPages: 'Макс. страниц за раз', search: 'Искать', showOriginal: 'Показать исходный список', loadMore: 'Загрузить ещё',
     searching: 'Поиск…', noToken: 'Нет cookie _csrfToken; перезагрузите страницу.',
     progress: 'Страница {page}… найдено: {found}', partial: 'Найдено: {found} (до страницы {page}).',
@@ -91,6 +102,7 @@ const I18N = {
   th: {
     title: 'ตัวกรอง+', minChapters: 'ตอนขั้นต่ำ', maxChapters: 'ตอนสูงสุด', minScore: 'คะแนนขั้นต่ำ',
     publishedSince: 'เผยแพร่ตั้งแต่', withTags: 'มีแท็ก', tagsAll: 'ทั้งหมด (AND)', tagsAny: 'อย่างใดอย่างหนึ่ง (OR)', withoutTags: 'ไม่มีแท็ก', withoutWords: 'ไม่มีคำ', withoutAuthors: 'ไม่รวมผู้เขียน',
+    onlyCategories: 'เฉพาะหมวดหมู่', withoutCategories: 'ไม่รวมหมวดหมู่', hideInLibrary: 'ซ่อนเรื่องที่อยู่ในคลังของฉัน',
     maxPages: 'หน้าสูงสุดต่อรอบ', search: 'ค้นหา', showOriginal: 'แสดงรายการเดิม', loadMore: 'โหลดเพิ่ม',
     searching: 'กำลังค้นหา…', noToken: 'ไม่พบคุกกี้ _csrfToken โปรดโหลดหน้าใหม่',
     progress: 'หน้า {page}… พบ {found} เรื่อง', partial: 'พบ {found} เรื่อง (ถึงหน้า {page})',
@@ -99,6 +111,7 @@ const I18N = {
   tr: {
     title: 'Filtreler+', minChapters: 'Min. bölüm', maxChapters: 'Maks. bölüm', minScore: 'Min. puan',
     publishedSince: 'Yayın tarihi (itibaren)', withTags: 'Bu etiketlerle', tagsAll: 'Tümü (AND)', tagsAny: 'Herhangi biri (OR)', withoutTags: 'Bu etiketler olmadan', withoutWords: 'Bu kelimeler olmadan', withoutAuthors: 'Bu yazarlar olmadan',
+    onlyCategories: 'Yalnızca kategoriler', withoutCategories: 'Bu kategoriler olmadan', hideInLibrary: 'Kitaplığımdakileri gizle',
     maxPages: 'Tur başına maks. sayfa', search: 'Ara', showOriginal: 'Orijinal listeyi göster', loadMore: 'Daha fazla yükle',
     searching: 'Aranıyor…', noToken: '_csrfToken çerezi yok; sayfayı yenileyin.',
     progress: 'Sayfa {page}… {found} bulundu', partial: '{found} bulundu ({page}. sayfaya kadar).',
@@ -107,6 +120,7 @@ const I18N = {
   vi: {
     title: 'Bộ lọc+', minChapters: 'Số chương tối thiểu', maxChapters: 'Số chương tối đa', minScore: 'Điểm tối thiểu',
     publishedSince: 'Đăng từ ngày', withTags: 'Có thẻ', tagsAll: 'Tất cả (AND)', tagsAny: 'Bất kỳ (OR)', withoutTags: 'Không có thẻ', withoutWords: 'Không có từ', withoutAuthors: 'Không có tác giả',
+    onlyCategories: 'Chỉ thể loại', withoutCategories: 'Không có thể loại', hideInLibrary: 'Ẩn truyện trong thư viện của tôi',
     maxPages: 'Số trang tối đa mỗi lượt', search: 'Tìm kiếm', showOriginal: 'Xem danh sách gốc', loadMore: 'Tải thêm',
     searching: 'Đang tìm…', noToken: 'Thiếu cookie _csrfToken; hãy tải lại trang.',
     progress: 'Trang {page}… tìm thấy {found}', partial: 'Tìm thấy {found} (đến trang {page}).',
@@ -115,6 +129,7 @@ const I18N = {
   zh: {
     title: '篩選+', minChapters: '最少章節', maxChapters: '最多章節', minScore: '最低評分',
     publishedSince: '發布日期起', withTags: '包含標籤', tagsAll: '全部 (AND)', tagsAny: '任一 (OR)', withoutTags: '排除標籤', withoutWords: '排除關鍵字', withoutAuthors: '排除作者',
+    onlyCategories: '僅限分類', withoutCategories: '排除分類', hideInLibrary: '隱藏我書架中的作品',
     maxPages: '每批最多頁數', search: '搜尋', showOriginal: '顯示原始列表', loadMore: '載入更多',
     searching: '搜尋中…', noToken: '缺少 _csrfToken cookie，請重新整理頁面。',
     progress: '第 {page} 頁… 已找到 {found} 本', partial: '已找到 {found} 本（至第 {page} 頁）。',
@@ -123,6 +138,7 @@ const I18N = {
   fil: {
     title: 'Mga Filter+', minChapters: 'Min. na kabanata', maxChapters: 'Max. na kabanata', minScore: 'Min. na score',
     publishedSince: 'Inilathala mula', withTags: 'May tag', tagsAll: 'Lahat (AND)', tagsAny: 'Alinman (OR)', withoutTags: 'Walang tag', withoutWords: 'Walang salita', withoutAuthors: 'Walang may-akda',
+    onlyCategories: 'Mga kategorya lang', withoutCategories: 'Walang kategorya', hideInLibrary: 'Itago ang nasa aking library',
     maxPages: 'Max. na pahina bawat batch', search: 'Maghanap', showOriginal: 'Ipakita ang orihinal na listahan', loadMore: 'Mag-load pa',
     searching: 'Naghahanap…', noToken: 'Walang _csrfToken cookie; i-reload ang pahina.',
     progress: 'Pahina {page}… {found} ang nahanap', partial: '{found} ang nahanap (hanggang pahina {page}).',
