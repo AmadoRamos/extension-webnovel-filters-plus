@@ -14,4 +14,13 @@ function matches(book, f) {
   return true;
 }
 
-if (typeof module !== 'undefined') module.exports = { matches };
+// Datalist options for a comma-separated tag input: complete the last tag, keep the earlier ones.
+function tagSuggestions(value, tags) {
+  const parts = value.split(',').map(s => s.trim());
+  const typed = parts.pop().toLowerCase();
+  const prefix = parts.filter(Boolean).map(t => `${t}, `).join('');
+  const done = new Set(parts.map(t => t.toLowerCase()));
+  return tags.filter(t => !done.has(t) && t.includes(typed)).map(t => prefix + t);
+}
+
+if (typeof module !== 'undefined') module.exports = { matches, tagSuggestions };

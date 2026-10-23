@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert');
-const { matches } = require('./filter.js');
+const { matches, tagSuggestions } = require('./filter.js');
 
 const book = {
   bookName: 'Genshin Impact : Mas allá del cielo falso',
@@ -48,4 +48,11 @@ test('excludeWords rejects matches in title or description, ignoring case', () =
 test('publishedAfter rejects older books', () => {
   assert.equal(matches(book, { publishedAfter: Date.UTC(2026, 0, 1) }), true);
   assert.equal(matches(book, { publishedAfter: Date.UTC(2026, 6, 1) }), false);
+});
+
+test('tagSuggestions completes only the last comma-separated tag, skipping ones already typed', () => {
+  const tags = ['magia', 'isekai', 'harén', 'sistema'];
+  assert.deepEqual(tagSuggestions('', tags), ['magia', 'isekai', 'harén', 'sistema']);
+  assert.deepEqual(tagSuggestions('magia, is', tags), ['magia, isekai', 'magia, sistema']);
+  assert.deepEqual(tagSuggestions('magia,', tags), ['magia, isekai', 'magia, harén', 'magia, sistema']);
 });

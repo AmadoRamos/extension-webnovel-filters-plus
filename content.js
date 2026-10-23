@@ -10,8 +10,8 @@ panel.innerHTML = `
     <label>Capítulos máx <input name="maxChapters" type="number" min="0"></label>
     <label>Score mín <input name="minScore" type="number" min="0" max="5" step="0.1"></label>
     <label>Publicado desde <input name="publishedAfter" type="date"></label>
-    <label>Con tags <input name="includeTags" placeholder="magic, isekai"></label>
-    <label>Sin tags <input name="excludeTags" placeholder="r18, harem"></label>
+    <label>Con tags <input name="includeTags" list="wnf-include-tags" autocomplete="off" placeholder="magic, isekai"><datalist id="wnf-include-tags"></datalist></label>
+    <label>Sin tags <input name="excludeTags" list="wnf-exclude-tags" autocomplete="off" placeholder="r18, harem"><datalist id="wnf-exclude-tags"></datalist></label>
     <label>Sin palabras <input name="excludeWords" placeholder="naruto, pokemon"></label>
     <label>Páginas a escanear <input name="maxPages" type="number" min="1" max="50" value="10"></label>
     <button type="submit">Buscar</button>
@@ -31,6 +31,15 @@ try {
   const saved = JSON.parse(localStorage.getItem(STORE) || '{}');
   for (const [k, v] of Object.entries(saved)) if (form.elements[k]) form.elements[k].value = v;
 } catch {}
+
+// Every tag seen while scanning is kept in extension storage to feed the tag autocomplete.
+let knownTags = [];
+chrome.storage.local.get('tags').then(r => (knownTags = r.tags || []));
+for (const input of [form.elements.includeTags, form.elements.excludeTags]) {
+  const fill = () => input.list.replaceChildren(...tagSuggestions(input.value, knownTags).slice(0, 50).map(v => new Option(v)));
+  input.addEventListener('input', fill);
+  input.addEventListener('focus', fill);
+}
 
 function readFilters() {
   const raw = Object.fromEntries(new FormData(form));
@@ -83,6 +92,7 @@ form.addEventListener('submit', async e => {
   hideSiteList(true);
   reset.hidden = false;
   let found = 0;
+  const seen = new Set();
   try {
     for (let page = 1; page <= filters.maxPages; page++) {
       status.textContent = `Página ${page}/${filters.maxPages}… ${found} encontradas`;
@@ -92,6 +102,7 @@ form.addEventListener('submit', async e => {
       const res = await fetch(`/go/pcm/category/categoryAjax?${params}`, { headers: { 'x-requested-with': 'XMLHttpRequest' } });
       const { code, data } = await res.json();
       if (code !== 0) throw new Error(`code ${code}`);
+      for (const b of data.items) for (const t of b.tagInfo || []) seen.add(String(t.tagName).toLowerCase());
       for (const b of data.items.filter(b => matches(b, filters))) results.append(renderBook(b)), found++;
       if (Number(data.isLast) === 1) break;
       await new Promise(r => setTimeout(r, 300)); // ponytail: fixed delay to be polite; tune if the site throttles
@@ -101,5 +112,7 @@ form.addEventListener('submit', async e => {
     status.textContent = `Error: ${err.message} (${found} encontradas hasta ahora)`;
   } finally {
     button.disabled = false;
+    knownTags = [...new Set([...knownTags, ...seen])].sort();
+    chrome.storage.local.set({ tags: knownTags });
   }
 });
