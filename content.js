@@ -4,22 +4,22 @@ const hideSiteList = on => document.querySelector('.j_category_wrapper')?.toggle
 const panel = document.createElement('section');
 panel.id = 'wnf-panel';
 panel.innerHTML = `
-  <div class="g_hr pt16 pb16 mb12"><h4 class="fw700 lh24 fs20 ls0.15 ell c_m">Filtros+</h4></div>
+  <div class="g_hr pt16 pb16 mb12"><h4 class="fw700 lh24 fs20 ls0.15 ell c_m">Filters+</h4></div>
   <form>
-    <label>Capítulos mín <input name="minChapters" type="number" min="0"></label>
-    <label>Capítulos máx <input name="maxChapters" type="number" min="0"></label>
-    <label>Score mín <input name="minScore" type="number" min="0" max="5" step="0.1"></label>
-    <label>Publicado desde <input name="publishedAfter" type="date"></label>
-    <label>Con tags <input name="includeTags" list="wnf-include-tags" autocomplete="off" placeholder="magic, isekai"><datalist id="wnf-include-tags"></datalist></label>
-    <label>Sin tags <input name="excludeTags" list="wnf-exclude-tags" autocomplete="off" placeholder="r18, harem"><datalist id="wnf-exclude-tags"></datalist></label>
-    <label>Sin palabras <input name="excludeWords" placeholder="naruto, pokemon"></label>
-    <label>Máx. páginas por tanda <input name="maxPages" type="number" min="1" max="50" value="10"></label>
-    <button type="submit">Buscar</button>
-    <button type="button" class="wnf-reset" hidden>Ver lista original</button>
+    <label>Min chapters <input name="minChapters" type="number" min="0"></label>
+    <label>Max chapters <input name="maxChapters" type="number" min="0"></label>
+    <label>Min score <input name="minScore" type="number" min="0" max="5" step="0.1"></label>
+    <label>Published since <input name="publishedAfter" type="date"></label>
+    <label>With tags <input name="includeTags" list="wnf-include-tags" autocomplete="off" placeholder="magic, isekai"><datalist id="wnf-include-tags"></datalist></label>
+    <label>Without tags <input name="excludeTags" list="wnf-exclude-tags" autocomplete="off" placeholder="r18, harem"><datalist id="wnf-exclude-tags"></datalist></label>
+    <label>Without words <input name="excludeWords" placeholder="naruto, pokemon"></label>
+    <label>Max pages per batch <input name="maxPages" type="number" min="1" max="50" value="10"></label>
+    <button type="submit">Search</button>
+    <button type="button" class="wnf-reset" hidden>Show original list</button>
   </form>
   <ul class="wnf-results clearfix" style="margin: 0 -20px;"></ul>
   <p class="wnf-status" aria-live="polite"></p>
-  <button type="button" class="wnf-more" hidden>Cargar más</button>`;
+  <button type="button" class="wnf-more" hidden>Load more</button>`;
 if (siteForm) siteForm.after(panel);
 
 const form = panel.querySelector('form');
@@ -97,7 +97,7 @@ function renderBook(b) {
     + `</div></li>`;
 }
 
-// Like the site's own list, results load in batches: the next one starts when the "Cargar más" button scrolls into view.
+// Like the site's own list, results load in batches: the next one starts when the "Load more" button scrolls into view.
 const BATCH = 20; // matches per batch, one site page's worth
 let scan = null; // { params, filters, page, found, done, busy }
 
@@ -115,15 +115,15 @@ async function loadMore() {
   const s = scan;
   if (!s || s.busy || s.done) return;
   const token = (document.cookie.match(/_csrfToken=([^;]+)/) || [])[1];
-  if (!token) return (status.textContent = 'Falta la cookie _csrfToken; recarga la página.');
+  if (!token) return (status.textContent = 'Missing the _csrfToken cookie; reload the page.');
   s.busy = true;
   more.disabled = true;
-  more.textContent = 'Buscando…';
+  more.textContent = 'Searching…';
   const seen = new Set();
   let batchFound = 0;
   try {
     for (let i = 0; i < s.filters.maxPages && batchFound < BATCH && !s.done; i++, s.page++) {
-      status.textContent = `Página ${s.page}… ${s.found} encontradas`;
+      status.textContent = `Page ${s.page}… ${s.found} found`;
       s.params.set('_csrfToken', token);
       s.params.set('pageIndex', s.page);
       const res = await fetch(`/go/pcm/category/categoryAjax?${s.params}`, { headers: { 'x-requested-with': 'XMLHttpRequest' } });
@@ -138,15 +138,15 @@ async function loadMore() {
       s.done = Number(data.isLast) === 1;
       await new Promise(r => setTimeout(r, 300)); // ponytail: fixed delay to be polite; tune if the site throttles
     }
-    if (scan === s) status.textContent = s.done ? `Fin: ${s.found} encontradas.` : `${s.found} encontradas (hasta la página ${s.page - 1}).`;
+    if (scan === s) status.textContent = s.done ? `Done: ${s.found} found.` : `${s.found} found (up to page ${s.page - 1}).`;
   } catch (err) {
-    if (scan === s) status.textContent = `Error: ${err.message} (${s.found} encontradas hasta ahora)`;
+    if (scan === s) status.textContent = `Error: ${err.message} (${s.found} found so far)`;
   } finally {
     s.busy = false;
     if (scan === s) {
       more.hidden = s.done;
       more.disabled = false;
-      more.textContent = 'Cargar más';
+      more.textContent = 'Load more';
     }
     knownTags = [...new Set([...knownTags, ...seen])].sort();
     chrome.storage.local.set({ tags: knownTags });

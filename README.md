@@ -1,8 +1,8 @@
-# WebNovel Filtros+
+# WebNovel Filters+
 
 Chrome/Brave extension that adds extra filters to [webnovel.com](https://www.webnovel.com) category pages (for example `/stories/fanfic-video-games`).
 
-WebNovel only loads 20 books at a time, so the extension goes through the category's pages and shows only the books that match your filters. Like the site's own list, it loads in batches: when you reach the end of the results it searches the next pages (or click **Cargar más**). Available filters:
+WebNovel only loads 20 books at a time, so the extension goes through the category's pages and shows only the books that match your filters. Like the site's own list, it loads in batches: when you reach the end of the results it searches the next pages (or click **Load more**). Available filters:
 
 - Minimum and maximum chapters
 - Minimum score
@@ -12,15 +12,13 @@ WebNovel only loads 20 books at a time, so the extension goes through the catego
 
 The filters appear on the page, below "Sort By", and respect the status and sort order you have selected. Tags found while searching are saved to autocomplete the tag fields.
 
-The extension's interface is in Spanish.
-
 ## Installation
 
 1. Download or clone this repository.
 2. Open `chrome://extensions` (or `brave://extensions`).
 3. Turn on **Developer mode**.
 4. Click **Load unpacked** and select the repository folder.
-5. Open a category on webnovel.com and look for the **Filtros+** section.
+5. Open a category on webnovel.com and look for the **Filters+** section.
 
 To update it after changes, click the reload icon on the extension's card.
 
