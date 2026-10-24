@@ -47,6 +47,7 @@ try {
 
 // Every tag, author and category seen while scanning is kept in extension storage to feed the autocomplete.
 const known = { tags: [], authors: [], categories: [] };
+const MAX_NAMES = 3000; // per list
 chrome.storage.local.get(Object.keys(known)).then(r => { for (const k in known) known[k] = r[k] || []; });
 const SUGGEST = { includeTags: 'tags', excludeTags: 'tags', excludeAuthors: 'authors', includeCategories: 'categories', excludeCategories: 'categories' };
 for (const [name, kind] of Object.entries(SUGGEST)) {
@@ -56,7 +57,7 @@ for (const [name, kind] of Object.entries(SUGGEST)) {
   input.after(datalist);
   input.setAttribute('list', datalist.id);
   input.autocomplete = 'off';
-  const fill = () => datalist.replaceChildren(...listSuggestions(input.value, known[kind]).slice(0, 50).map(v => new Option(v)));
+  const fill = () => datalist.replaceChildren(...listSuggestions(input.value, known[kind]).sort().slice(0, 50).map(v => new Option(v)));
   input.addEventListener('input', fill);
   input.addEventListener('focus', fill);
 }
@@ -122,6 +123,7 @@ function renderBook(b) {
 
 // Like the site's own list, results load in batches: the next one starts when the "Load more" button scrolls into view.
 const BATCH = 20; // matches per batch, one site page's worth
+const AUTO_LIMIT = 500; // past this many results, only a click loads more, so the page can't grow without limit
 let scan = null; // { params, filters, page, found, done, busy }
 
 function showOriginal() {
@@ -166,7 +168,10 @@ async function loadMore() {
       s.done = Number(data.isLast) === 1;
       await new Promise(r => setTimeout(r, 300)); // ponytail: fixed delay to be polite; tune if the site throttles
     }
-    if (scan === s) status.textContent = s.done ? t('done', { found: s.found }) : t('partial', { found: s.found, page: s.page - 1 });
+    if (scan === s) {
+      status.textContent = s.done ? t('done', { found: s.found }) : t('partial', { found: s.found, page: s.page - 1 });
+      if (!s.done && s.found >= AUTO_LIMIT) status.textContent += ` ${t('autoPaused', { limit: AUTO_LIMIT })}`;
+    }
   } catch (err) {
     if (scan === s) status.textContent = t('error', { error: err.message, found: s.found });
   } finally {
@@ -176,12 +181,12 @@ async function loadMore() {
       more.disabled = false;
       more.textContent = t('loadMore');
     }
-    for (const k in known) known[k] = [...new Set([...known[k], ...seen[k]])].sort();
+    for (const k in known) known[k] = mergeRecent(known[k], seen[k], MAX_NAMES);
     chrome.storage.local.set(known);
   }
 }
 
-new IntersectionObserver(entries => entries[0].isIntersecting && loadMore()).observe(more);
+new IntersectionObserver(entries => entries[0].isIntersecting && scan?.found < AUTO_LIMIT && loadMore()).observe(more);
 more.addEventListener('click', loadMore);
 
 form.addEventListener('submit', e => {

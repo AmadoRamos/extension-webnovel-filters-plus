@@ -30,4 +30,10 @@ function listSuggestions(value, names) {
   return names.filter(n => !done.has(n) && n.includes(typed)).map(n => prefix + n);
 }
 
-if (typeof module !== 'undefined') module.exports = { matches, listSuggestions };
+// Autocomplete lists keep the most recently seen names (newest last), capped so they can't grow forever.
+function mergeRecent(old, seen, max) {
+  const fresh = new Set(seen);
+  return [...old.filter(n => !fresh.has(n)), ...fresh].slice(-max);
+}
+
+if (typeof module !== 'undefined') module.exports = { matches, listSuggestions, mergeRecent };

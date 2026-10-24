@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert');
-const { matches, listSuggestions } = require('./filter.js');
+const { matches, listSuggestions, mergeRecent } = require('./filter.js');
 
 const book = {
   bookName: 'Genshin Impact : Mas allá del cielo falso',
@@ -88,4 +88,9 @@ test('includeCategories keeps only those categories, excludeCategories hides the
   assert.equal(matches(book, { includeCategories: [] }), true);
   assert.equal(matches(book, { excludeCategories: ['VIDEOJUEGOS'] }), false);
   assert.equal(matches(book, { excludeCategories: ['video'] }), true);
+});
+
+test('mergeRecent moves seen names to the end and keeps only the newest max', () => {
+  assert.deepEqual(mergeRecent(['a', 'b', 'c'], ['b', 'd'], 10), ['a', 'c', 'b', 'd']);
+  assert.deepEqual(mergeRecent(['a', 'b', 'c'], ['d', 'e'], 3), ['c', 'd', 'e']);
 });

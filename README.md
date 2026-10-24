@@ -4,7 +4,7 @@ Unofficial extension; not affiliated with or endorsed by WebNovel.
 
 Chrome/Brave extension that adds extra filters to [webnovel.com](https://www.webnovel.com) category pages (for example `/stories/fanfic-video-games`).
 
-WebNovel only loads 20 books at a time, so the extension goes through the category's pages and shows only the books that match your filters. Like the site's own list, it loads in batches: when you reach the end of the results it searches the next pages (or click **Load more**). Available filters:
+WebNovel only loads 20 books at a time, so the extension goes through the category's pages and shows only the books that match your filters. Like the site's own list, it loads in batches: when you reach the end of the results it searches the next pages (or click **Load more**). After 500 results it stops loading on its own and waits for a click, so the page stays light. Available filters:
 
 - Minimum and maximum chapters
 - Minimum score

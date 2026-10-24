@@ -8,4 +8,5 @@
 #wnf-panel button { padding: 6px 16px; border: 0; border-radius: 16px; cursor: pointer; font: inherit; font-weight: 700; align-self: end; }
 #wnf-panel button[type=submit] { background: #3b66f5; color: #fff; }
 #wnf-panel button:disabled { opacity: .5; }
+#wnf-panel .wnf-results > li { content-visibility: auto; contain-intrinsic-size: auto 136px; } /* skip layout/paint of off-screen results */
 #wnf-panel .wnf-more:not([hidden]) { display: block; margin: 8px auto; }
