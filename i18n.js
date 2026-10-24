@@ -1,6 +1,7 @@
 // UI strings per webnovel.com language (the URL prefix: /es/, /ja/...; no prefix = English).
 const I18N = {
   en: {
+    groupBook: 'Chapters, score & date', groupShowOnly: 'Show only', groupHide: 'Hide',
     title: 'Filters+', minChapters: 'Min chapters', maxChapters: 'Max chapters', minScore: 'Min score', keepUnrated: 'Include unrated',
     publishedSince: 'Published since', withTags: 'With tags', tagsAll: 'All (AND)', tagsAny: 'Any (OR)', withoutTags: 'Without tags', withoutWords: 'Without words', withoutAuthors: 'Without authors',
     onlyCategories: 'Only categories', withoutCategories: 'Without categories', hideInLibrary: 'Hide books in my library',
@@ -10,6 +11,7 @@ const I18N = {
     done: 'Done: {found} found.', autoPaused: 'Automatic loading paused after {limit} results; use "Load more" to keep going.', error: 'Error: {error} ({found} found so far)',
   },
   es: {
+    groupBook: 'Capítulos, score y fecha', groupShowOnly: 'Mostrar solo', groupHide: 'Ocultar',
     title: 'Filtros+', minChapters: 'Capítulos mín.', maxChapters: 'Capítulos máx.', minScore: 'Score mín.', keepUnrated: 'Incluir sin calificación',
     publishedSince: 'Publicado desde', withTags: 'Con tags', tagsAll: 'Todas (AND)', tagsAny: 'Alguna (OR)', withoutTags: 'Sin tags', withoutWords: 'Sin palabras', withoutAuthors: 'Sin autores',
     onlyCategories: 'Solo categorías', withoutCategories: 'Sin categorías', hideInLibrary: 'Ocultar los de mi biblioteca',
@@ -19,6 +21,7 @@ const I18N = {
     done: 'Fin: {found} encontradas.', autoPaused: 'Carga automática pausada tras {limit} resultados; usa "Cargar más" para seguir.', error: 'Error: {error} ({found} encontradas hasta ahora)',
   },
   pt: {
+    groupBook: 'Capítulos, nota e data', groupShowOnly: 'Mostrar só', groupHide: 'Ocultar',
     title: 'Filtros+', minChapters: 'Capítulos mín.', maxChapters: 'Capítulos máx.', minScore: 'Nota mín.', keepUnrated: 'Incluir sem nota',
     publishedSince: 'Publicado desde', withTags: 'Com tags', tagsAll: 'Todas (AND)', tagsAny: 'Alguma (OR)', withoutTags: 'Sem tags', withoutWords: 'Sem palavras', withoutAuthors: 'Sem autores',
     onlyCategories: 'Só categorias', withoutCategories: 'Sem categorias', hideInLibrary: 'Ocultar os da minha biblioteca',
@@ -28,6 +31,7 @@ const I18N = {
     done: 'Fim: {found} encontrados.', autoPaused: 'Carregamento automático pausado após {limit} resultados; use "Carregar mais" para continuar.', error: 'Erro: {error} ({found} encontrados até agora)',
   },
   fr: {
+    groupBook: 'Chapitres, note et date', groupShowOnly: 'Afficher seulement', groupHide: 'Masquer',
     title: 'Filtres+', minChapters: 'Chapitres min.', maxChapters: 'Chapitres max.', minScore: 'Note min.', keepUnrated: 'Inclure les non notés',
     publishedSince: 'Publié depuis', withTags: 'Avec tags', tagsAll: 'Toutes (AND)', tagsAny: 'Au moins une (OR)', withoutTags: 'Sans tags', withoutWords: 'Sans mots', withoutAuthors: 'Sans auteurs',
     onlyCategories: 'Seulement catégories', withoutCategories: 'Sans catégories', hideInLibrary: 'Masquer ceux de ma bibliothèque',
@@ -37,6 +41,7 @@ const I18N = {
     done: 'Terminé : {found} trouvés.', autoPaused: 'Chargement automatique en pause après {limit} résultats ; utilisez « Charger plus » pour continuer.', error: 'Erreur : {error} ({found} trouvés jusqu\'ici)',
   },
   de: {
+    groupBook: 'Kapitel, Bewertung & Datum', groupShowOnly: 'Nur anzeigen', groupHide: 'Ausblenden',
     title: 'Filter+', minChapters: 'Min. Kapitel', maxChapters: 'Max. Kapitel', minScore: 'Min. Bewertung', keepUnrated: 'Unbewertete einbeziehen',
     publishedSince: 'Veröffentlicht seit', withTags: 'Mit Tags', tagsAll: 'Alle (AND)', tagsAny: 'Mindestens eine (OR)', withoutTags: 'Ohne Tags', withoutWords: 'Ohne Wörter', withoutAuthors: 'Ohne Autoren',
     onlyCategories: 'Nur Kategorien', withoutCategories: 'Ohne Kategorien', hideInLibrary: 'Bücher in meiner Bibliothek ausblenden',
@@ -46,6 +51,7 @@ const I18N = {
     done: 'Fertig: {found} gefunden.', autoPaused: 'Automatisches Laden nach {limit} Ergebnissen pausiert; mit „Mehr laden“ geht es weiter.', error: 'Fehler: {error} ({found} bisher gefunden)',
   },
   id: {
+    groupBook: 'Bab, skor & tanggal', groupShowOnly: 'Tampilkan hanya', groupHide: 'Sembunyikan',
     title: 'Filter+', minChapters: 'Bab min.', maxChapters: 'Bab maks.', minScore: 'Skor min.', keepUnrated: 'Sertakan yang belum dinilai',
     publishedSince: 'Terbit sejak', withTags: 'Dengan tag', tagsAll: 'Semua (AND)', tagsAny: 'Salah satu (OR)', withoutTags: 'Tanpa tag', withoutWords: 'Tanpa kata', withoutAuthors: 'Tanpa penulis',
     onlyCategories: 'Hanya kategori', withoutCategories: 'Tanpa kategori', hideInLibrary: 'Sembunyikan yang ada di pustaka saya',
@@ -55,6 +61,7 @@ const I18N = {
     done: 'Selesai: {found} ditemukan.', autoPaused: 'Pemuatan otomatis dijeda setelah {limit} hasil; gunakan "Muat lebih banyak" untuk melanjutkan.', error: 'Kesalahan: {error} ({found} ditemukan sejauh ini)',
   },
   ms: {
+    groupBook: 'Bab, skor & tarikh', groupShowOnly: 'Tunjukkan sahaja', groupHide: 'Sembunyikan',
     title: 'Penapis+', minChapters: 'Bab min.', maxChapters: 'Bab maks.', minScore: 'Skor min.', keepUnrated: 'Sertakan yang belum dinilai',
     publishedSince: 'Diterbitkan sejak', withTags: 'Dengan tag', tagsAll: 'Semua (AND)', tagsAny: 'Salah satu (OR)', withoutTags: 'Tanpa tag', withoutWords: 'Tanpa perkataan', withoutAuthors: 'Tanpa pengarang',
     onlyCategories: 'Kategori sahaja', withoutCategories: 'Tanpa kategori', hideInLibrary: 'Sembunyikan yang ada dalam perpustakaan saya',
@@ -64,6 +71,7 @@ const I18N = {
     done: 'Selesai: {found} dijumpai.', autoPaused: 'Pemuatan automatik dijeda selepas {limit} hasil; gunakan "Muat lagi" untuk teruskan.', error: 'Ralat: {error} ({found} dijumpai setakat ini)',
   },
   it: {
+    groupBook: 'Capitoli, voto e data', groupShowOnly: 'Mostra solo', groupHide: 'Nascondi',
     title: 'Filtri+', minChapters: 'Capitoli min.', maxChapters: 'Capitoli max.', minScore: 'Voto min.', keepUnrated: 'Includi senza voto',
     publishedSince: 'Pubblicato dal', withTags: 'Con tag', tagsAll: 'Tutti (AND)', tagsAny: 'Almeno uno (OR)', withoutTags: 'Senza tag', withoutWords: 'Senza parole', withoutAuthors: 'Senza autori',
     onlyCategories: 'Solo categorie', withoutCategories: 'Senza categorie', hideInLibrary: 'Nascondi quelli nella mia libreria',
@@ -73,6 +81,7 @@ const I18N = {
     done: 'Fine: {found} trovati.', autoPaused: 'Caricamento automatico in pausa dopo {limit} risultati; usa "Carica altri" per continuare.', error: 'Errore: {error} ({found} trovati finora)',
   },
   ja: {
+    groupBook: '話数・評価・公開日', groupShowOnly: '表示する条件', groupHide: '非表示にする条件',
     title: 'フィルター+', minChapters: '最小話数', maxChapters: '最大話数', minScore: '最低評価', keepUnrated: '評価なしも含める',
     publishedSince: '公開日以降', withTags: '含むタグ', tagsAll: 'すべて (AND)', tagsAny: 'いずれか (OR)', withoutTags: '除外タグ', withoutWords: '除外ワード', withoutAuthors: '除外する作者',
     onlyCategories: '対象カテゴリー', withoutCategories: '除外カテゴリー', hideInLibrary: 'ライブラリにある作品を隠す',
@@ -82,6 +91,7 @@ const I18N = {
     done: '完了：{found} 件', autoPaused: '{limit} 件で自動読み込みを停止しました。続けるには「さらに読み込む」を押してください。', error: 'エラー：{error}（ここまで {found} 件）',
   },
   ko: {
+    groupBook: '회차·평점·날짜', groupShowOnly: '이것만 표시', groupHide: '숨기기',
     title: '필터+', minChapters: '최소 회차', maxChapters: '최대 회차', minScore: '최소 평점', keepUnrated: '평점 없는 작품 포함',
     publishedSince: '게시일 이후', withTags: '포함 태그', tagsAll: '모두 (AND)', tagsAny: '하나 이상 (OR)', withoutTags: '제외 태그', withoutWords: '제외 단어', withoutAuthors: '제외할 작가',
     onlyCategories: '포함 카테고리', withoutCategories: '제외 카테고리', hideInLibrary: '내 서재에 있는 작품 숨기기',
@@ -91,6 +101,7 @@ const I18N = {
     done: '완료: {found}개 찾음.', autoPaused: '{limit}개 이후 자동 불러오기가 일시 중지되었습니다. 계속하려면 "더 보기"를 누르세요.', error: '오류: {error} (지금까지 {found}개 찾음)',
   },
   ru: {
+    groupBook: 'Главы, оценка и дата', groupShowOnly: 'Показывать только', groupHide: 'Скрыть',
     title: 'Фильтры+', minChapters: 'Мин. глав', maxChapters: 'Макс. глав', minScore: 'Мин. оценка', keepUnrated: 'Включать без оценки',
     publishedSince: 'Опубликовано с', withTags: 'С тегами', tagsAll: 'Все (AND)', tagsAny: 'Любой (OR)', withoutTags: 'Без тегов', withoutWords: 'Без слов', withoutAuthors: 'Без авторов',
     onlyCategories: 'Только категории', withoutCategories: 'Без категорий', hideInLibrary: 'Скрыть книги из моей библиотеки',
@@ -100,6 +111,7 @@ const I18N = {
     done: 'Готово: найдено {found}.', autoPaused: 'Автозагрузка приостановлена после {limit} результатов; нажмите «Загрузить ещё», чтобы продолжить.', error: 'Ошибка: {error} (пока найдено: {found})',
   },
   th: {
+    groupBook: 'จำนวนตอน คะแนน และวันที่', groupShowOnly: 'แสดงเฉพาะ', groupHide: 'ซ่อน',
     title: 'ตัวกรอง+', minChapters: 'ตอนขั้นต่ำ', maxChapters: 'ตอนสูงสุด', minScore: 'คะแนนขั้นต่ำ', keepUnrated: 'รวมเรื่องที่ยังไม่มีคะแนน',
     publishedSince: 'เผยแพร่ตั้งแต่', withTags: 'มีแท็ก', tagsAll: 'ทั้งหมด (AND)', tagsAny: 'อย่างใดอย่างหนึ่ง (OR)', withoutTags: 'ไม่มีแท็ก', withoutWords: 'ไม่มีคำ', withoutAuthors: 'ไม่รวมผู้เขียน',
     onlyCategories: 'เฉพาะหมวดหมู่', withoutCategories: 'ไม่รวมหมวดหมู่', hideInLibrary: 'ซ่อนเรื่องที่อยู่ในคลังของฉัน',
@@ -109,6 +121,7 @@ const I18N = {
     done: 'เสร็จสิ้น: พบ {found} เรื่อง', autoPaused: 'หยุดโหลดอัตโนมัติหลังจาก {limit} รายการ กด "โหลดเพิ่ม" เพื่อดำเนินการต่อ', error: 'ข้อผิดพลาด: {error} (พบแล้ว {found} เรื่อง)',
   },
   tr: {
+    groupBook: 'Bölüm, puan ve tarih', groupShowOnly: 'Yalnızca göster', groupHide: 'Gizle',
     title: 'Filtreler+', minChapters: 'Min. bölüm', maxChapters: 'Maks. bölüm', minScore: 'Min. puan', keepUnrated: 'Puanı olmayanları dahil et',
     publishedSince: 'Yayın tarihi (itibaren)', withTags: 'Bu etiketlerle', tagsAll: 'Tümü (AND)', tagsAny: 'Herhangi biri (OR)', withoutTags: 'Bu etiketler olmadan', withoutWords: 'Bu kelimeler olmadan', withoutAuthors: 'Bu yazarlar olmadan',
     onlyCategories: 'Yalnızca kategoriler', withoutCategories: 'Bu kategoriler olmadan', hideInLibrary: 'Kitaplığımdakileri gizle',
@@ -118,6 +131,7 @@ const I18N = {
     done: 'Bitti: {found} bulundu.', autoPaused: 'Otomatik yükleme {limit} sonuçtan sonra duraklatıldı; devam etmek için "Daha fazla yükle" düğmesini kullanın.', error: 'Hata: {error} (şu ana kadar {found} bulundu)',
   },
   vi: {
+    groupBook: 'Số chương, điểm và ngày', groupShowOnly: 'Chỉ hiển thị', groupHide: 'Ẩn',
     title: 'Bộ lọc+', minChapters: 'Số chương tối thiểu', maxChapters: 'Số chương tối đa', minScore: 'Điểm tối thiểu', keepUnrated: 'Bao gồm truyện chưa có điểm',
     publishedSince: 'Đăng từ ngày', withTags: 'Có thẻ', tagsAll: 'Tất cả (AND)', tagsAny: 'Bất kỳ (OR)', withoutTags: 'Không có thẻ', withoutWords: 'Không có từ', withoutAuthors: 'Không có tác giả',
     onlyCategories: 'Chỉ thể loại', withoutCategories: 'Không có thể loại', hideInLibrary: 'Ẩn truyện trong thư viện của tôi',
@@ -127,6 +141,7 @@ const I18N = {
     done: 'Xong: tìm thấy {found}.', autoPaused: 'Đã tạm dừng tự động tải sau {limit} kết quả; bấm "Tải thêm" để tiếp tục.', error: 'Lỗi: {error} (đã tìm thấy {found})',
   },
   zh: {
+    groupBook: '章節、評分與日期', groupShowOnly: '僅顯示', groupHide: '隱藏',
     title: '篩選+', minChapters: '最少章節', maxChapters: '最多章節', minScore: '最低評分', keepUnrated: '包含未評分作品',
     publishedSince: '發布日期起', withTags: '包含標籤', tagsAll: '全部 (AND)', tagsAny: '任一 (OR)', withoutTags: '排除標籤', withoutWords: '排除關鍵字', withoutAuthors: '排除作者',
     onlyCategories: '僅限分類', withoutCategories: '排除分類', hideInLibrary: '隱藏我書架中的作品',
@@ -136,6 +151,7 @@ const I18N = {
     done: '完成：共找到 {found} 本。', autoPaused: '已載入 {limit} 筆，自動載入已暫停；請按「載入更多」繼續。', error: '錯誤：{error}（目前已找到 {found} 本）',
   },
   fil: {
+    groupBook: 'Kabanata, score at petsa', groupShowOnly: 'Ipakita lang', groupHide: 'Itago',
     title: 'Mga Filter+', minChapters: 'Min. na kabanata', maxChapters: 'Max. na kabanata', minScore: 'Min. na score', keepUnrated: 'Isama ang walang rating',
     publishedSince: 'Inilathala mula', withTags: 'May tag', tagsAll: 'Lahat (AND)', tagsAny: 'Alinman (OR)', withoutTags: 'Walang tag', withoutWords: 'Walang salita', withoutAuthors: 'Walang may-akda',
     onlyCategories: 'Mga kategorya lang', withoutCategories: 'Walang kategorya', hideInLibrary: 'Itago ang nasa aking library',

@@ -9,21 +9,34 @@ panel.id = 'wnf-panel';
 panel.innerHTML = `
   <div class="g_hr pt16 pb16 mb12"><h4 class="fw700 lh24 fs20 ls0.15 ell c_m">${t('title')}</h4></div>
   <form>
-    <label>${t('minChapters')} <input name="minChapters" type="number" min="0"></label>
-    <label>${t('maxChapters')} <input name="maxChapters" type="number" min="0"></label>
-    <label>${t('minScore')} <input name="minScore" type="number" min="0" max="5" step="0.1"></label>
-    <label class="wnf-check"><input name="keepUnrated" type="checkbox"> ${t('keepUnrated')}</label>
-    <label>${t('publishedSince')} <input name="publishedAfter" type="date"></label>
-    <label><span class="wnf-row">${t('withTags')} <select name="includeMode" aria-label="${t('withTags')}"><option value="all">${t('tagsAll')}</option><option value="any">${t('tagsAny')}</option></select></span><input name="includeTags" placeholder="magic, isekai"></label>
-    <label>${t('withoutTags')} <input name="excludeTags" placeholder="r18, harem"></label>
-    <label>${t('withoutWords')} <input name="excludeWords" placeholder="naruto, pokemon"></label>
-    <label>${t('withoutAuthors')} <input name="excludeAuthors" placeholder="author1, author2"></label>
-    <label>${t('onlyCategories')} <input name="includeCategories"></label>
-    <label>${t('withoutCategories')} <input name="excludeCategories"></label>
-    <label class="wnf-check"><input name="hideInLibrary" type="checkbox"> ${t('hideInLibrary')}</label>
-    <label>${t('maxPages')} <input name="maxPages" type="number" min="1" max="50" value="10"></label>
-    <button type="submit">${t('search')}</button>
-    <button type="button" class="wnf-reset" hidden>${t('showOriginal')}</button>
+    <fieldset>
+      <legend>${t('groupBook')}</legend>
+      <label>${t('minChapters')} <input name="minChapters" type="number" min="0"></label>
+      <label>${t('maxChapters')} <input name="maxChapters" type="number" min="0"></label>
+      <div class="wnf-field">
+        <label>${t('minScore')} <input name="minScore" type="number" min="0" max="5" step="0.1"></label>
+        <label class="wnf-check"><input name="keepUnrated" type="checkbox"> ${t('keepUnrated')}</label>
+      </div>
+      <label>${t('publishedSince')} <input name="publishedAfter" type="date"></label>
+    </fieldset>
+    <fieldset>
+      <legend>${t('groupShowOnly')}</legend>
+      <label><span class="wnf-row">${t('withTags')} <select name="includeMode" aria-label="${t('withTags')}"><option value="all">${t('tagsAll')}</option><option value="any">${t('tagsAny')}</option></select></span><input name="includeTags" placeholder="magic, isekai"></label>
+      <label>${t('onlyCategories')} <input name="includeCategories"></label>
+    </fieldset>
+    <fieldset>
+      <legend>${t('groupHide')}</legend>
+      <label>${t('withoutTags')} <input name="excludeTags" placeholder="r18, harem"></label>
+      <label>${t('withoutWords')} <input name="excludeWords" placeholder="naruto, pokemon"></label>
+      <label>${t('withoutAuthors')} <input name="excludeAuthors" placeholder="author1, author2"></label>
+      <label>${t('withoutCategories')} <input name="excludeCategories"></label>
+      <label class="wnf-check wnf-wide"><input name="hideInLibrary" type="checkbox"> ${t('hideInLibrary')}</label>
+    </fieldset>
+    <div class="wnf-actions">
+      <label>${t('maxPages')} <input name="maxPages" type="number" min="1" max="50" value="10"></label>
+      <button type="submit">${t('search')}</button>
+      <button type="button" class="wnf-reset" hidden>${t('showOriginal')}</button>
+    </div>
   </form>
   <ul class="wnf-results clearfix" style="margin: 0 -20px;"></ul>
   <p class="wnf-status" aria-live="polite"></p>

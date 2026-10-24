@@ -1,11 +1,17 @@
 #wnf-panel { margin-bottom: 16px; font-size: 14px; }
-#wnf-panel form { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px 12px; }
+#wnf-panel form { display: grid; gap: 12px; }
+#wnf-panel fieldset { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px 12px; align-items: start; min-width: 0; margin: 0; padding: 4px 12px 12px; border: 1px solid rgba(128, 128, 128, .25); border-radius: 8px; }
+#wnf-panel legend { padding: 0 4px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; opacity: .7; }
+#wnf-panel .wnf-field { display: flex; flex-direction: column; gap: 6px; }
+#wnf-panel .wnf-wide { grid-column: 1 / -1; }
+#wnf-panel .wnf-actions { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
+#wnf-panel .wnf-actions label { width: 150px; }
 #wnf-panel label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; }
 #wnf-panel .wnf-row { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
 #wnf-panel .wnf-row select { height: auto; flex: none; padding: 0; border: 0; font-size: 12px; line-height: 16px; font-weight: 700; color: #3b66f5; cursor: pointer; }
 #wnf-panel input, #wnf-panel select { padding: 6px 8px; border: 1px solid rgba(128, 128, 128, .4); border-radius: 8px; background: transparent; color: inherit; font: inherit; }
-#wnf-panel .wnf-check { flex-direction: row; align-items: center; align-self: end; gap: 6px; padding-bottom: 8px; }
-#wnf-panel button { padding: 6px 16px; border: 0; border-radius: 16px; cursor: pointer; font: inherit; font-weight: 700; align-self: end; }
+#wnf-panel .wnf-check { flex-direction: row; align-items: center; gap: 6px; cursor: pointer; }
+#wnf-panel button { padding: 7px 20px; border: 0; border-radius: 16px; cursor: pointer; font: inherit; font-weight: 700; }
 #wnf-panel button[type=submit] { background: #3b66f5; color: #fff; }
 #wnf-panel button:disabled { opacity: .5; }
 #wnf-panel .wnf-results > li { content-visibility: auto; contain-intrinsic-size: auto 136px; } /* skip layout/paint of off-screen results */
