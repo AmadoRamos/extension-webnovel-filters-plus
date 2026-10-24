@@ -9,6 +9,7 @@ const I18N = {
     searching: 'Searching…', noToken: 'Missing the _csrfToken cookie; reload the page.',
     progress: 'Page {page}… {found} found', partial: '{found} found (up to page {page}).',
     done: 'Done: {found} found.', autoPaused: 'Automatic loading paused after {limit} results; use "Load more" to keep going.', error: 'Error: {error} ({found} found so far)',
+    tipMinChapters: 'Hide books with fewer chapters than this.', tipMaxChapters: 'Hide books with more chapters than this.', tipMinScore: 'Hide books rated below this (0–5).', tipKeepUnrated: 'With a minimum score, still show books nobody has rated yet.', tipPublishedSince: 'Show only books first published on or after this date.', tipWithTags: 'Comma-separated tags. AND: the book needs all of them. OR: one is enough.', tipOnlyCategories: 'Comma-separated categories; show only books from these.', tipWithoutTags: 'Comma-separated tags; hide books that have any of them.', tipWithoutWords: 'Comma-separated words; hide books that mention any of them in the title or description.', tipWithoutAuthors: 'Comma-separated exact author names; hide their books.', tipWithoutCategories: 'Comma-separated categories; hide books from these.', tipHideInLibrary: 'Hide books you already added to your library.', tipMaxPages: 'How many site pages to scan at most each time results load.',
   },
   es: {
     groupBook: 'Capítulos, score y fecha', groupShowOnly: 'Mostrar solo', groupHide: 'Ocultar',
@@ -19,6 +20,7 @@ const I18N = {
     searching: 'Buscando…', noToken: 'Falta la cookie _csrfToken; recarga la página.',
     progress: 'Página {page}… {found} encontradas', partial: '{found} encontradas (hasta la página {page}).',
     done: 'Fin: {found} encontradas.', autoPaused: 'Carga automática pausada tras {limit} resultados; usa "Cargar más" para seguir.', error: 'Error: {error} ({found} encontradas hasta ahora)',
+    tipMinChapters: 'Oculta libros con menos capítulos que este número.', tipMaxChapters: 'Oculta libros con más capítulos que este número.', tipMinScore: 'Oculta libros con calificación menor a esta (0–5).', tipKeepUnrated: 'Con un score mínimo, sigue mostrando los libros que nadie ha calificado.', tipPublishedSince: 'Muestra solo libros publicados en esta fecha o después.', tipWithTags: 'Tags separados por comas. AND: el libro debe tenerlos todos. OR: basta con uno.', tipOnlyCategories: 'Categorías separadas por comas; muestra solo libros de estas.', tipWithoutTags: 'Tags separados por comas; oculta libros que tengan cualquiera de ellos.', tipWithoutWords: 'Palabras separadas por comas; oculta libros que las mencionen en el título o la descripción.', tipWithoutAuthors: 'Nombres exactos de autores separados por comas; oculta sus libros.', tipWithoutCategories: 'Categorías separadas por comas; oculta libros de estas.', tipHideInLibrary: 'Oculta los libros que ya agregaste a tu biblioteca.', tipMaxPages: 'Cuántas páginas del sitio revisar como máximo cada vez que se cargan resultados.',
   },
   pt: {
     groupBook: 'Capítulos, nota e data', groupShowOnly: 'Mostrar só', groupHide: 'Ocultar',
@@ -29,6 +31,7 @@ const I18N = {
     searching: 'Buscando…', noToken: 'Falta o cookie _csrfToken; recarregue a página.',
     progress: 'Página {page}… {found} encontrados', partial: '{found} encontrados (até a página {page}).',
     done: 'Fim: {found} encontrados.', autoPaused: 'Carregamento automático pausado após {limit} resultados; use "Carregar mais" para continuar.', error: 'Erro: {error} ({found} encontrados até agora)',
+    tipMinChapters: 'Oculta livros com menos capítulos que este número.', tipMaxChapters: 'Oculta livros com mais capítulos que este número.', tipMinScore: 'Oculta livros com nota abaixo desta (0–5).', tipKeepUnrated: 'Com uma nota mínima, continua mostrando livros que ninguém avaliou.', tipPublishedSince: 'Mostra só livros publicados nesta data ou depois.', tipWithTags: 'Tags separadas por vírgulas. AND: o livro precisa ter todas. OR: basta uma.', tipOnlyCategories: 'Categorias separadas por vírgulas; mostra só livros delas.', tipWithoutTags: 'Tags separadas por vírgulas; oculta livros que tenham qualquer uma.', tipWithoutWords: 'Palavras separadas por vírgulas; oculta livros que as mencionem no título ou na descrição.', tipWithoutAuthors: 'Nomes exatos de autores separados por vírgulas; oculta os livros deles.', tipWithoutCategories: 'Categorias separadas por vírgulas; oculta livros delas.', tipHideInLibrary: 'Oculta os livros que você já adicionou à sua biblioteca.', tipMaxPages: 'Quantas páginas do site verificar no máximo cada vez que os resultados carregam.',
   },
   fr: {
     groupBook: 'Chapitres, note et date', groupShowOnly: 'Afficher seulement', groupHide: 'Masquer',
@@ -39,6 +42,7 @@ const I18N = {
     searching: 'Recherche…', noToken: 'Cookie _csrfToken manquant ; rechargez la page.',
     progress: 'Page {page}… {found} trouvés', partial: '{found} trouvés (jusqu\'à la page {page}).',
     done: 'Terminé : {found} trouvés.', autoPaused: 'Chargement automatique en pause après {limit} résultats ; utilisez « Charger plus » pour continuer.', error: 'Erreur : {error} ({found} trouvés jusqu\'ici)',
+    tipMinChapters: 'Masque les livres ayant moins de chapitres que ce nombre.', tipMaxChapters: 'Masque les livres ayant plus de chapitres que ce nombre.', tipMinScore: 'Masque les livres notés en dessous de cette valeur (0–5).', tipKeepUnrated: 'Avec une note minimale, affiche quand même les livres que personne n\'a notés.', tipPublishedSince: 'Affiche seulement les livres publiés à cette date ou après.', tipWithTags: 'Tags séparés par des virgules. AND : le livre doit tous les avoir. OR : un seul suffit.', tipOnlyCategories: 'Catégories séparées par des virgules ; affiche seulement les livres de celles-ci.', tipWithoutTags: 'Tags séparés par des virgules ; masque les livres qui en ont un.', tipWithoutWords: 'Mots séparés par des virgules ; masque les livres qui les mentionnent dans le titre ou la description.', tipWithoutAuthors: 'Noms d\'auteurs exacts séparés par des virgules ; masque leurs livres.', tipWithoutCategories: 'Catégories séparées par des virgules ; masque les livres de celles-ci.', tipHideInLibrary: 'Masque les livres déjà ajoutés à votre bibliothèque.', tipMaxPages: 'Nombre maximal de pages du site à parcourir à chaque chargement de résultats.',
   },
   de: {
     groupBook: 'Kapitel, Bewertung & Datum', groupShowOnly: 'Nur anzeigen', groupHide: 'Ausblenden',
@@ -49,6 +53,7 @@ const I18N = {
     searching: 'Suche…', noToken: 'Cookie _csrfToken fehlt; Seite neu laden.',
     progress: 'Seite {page}… {found} gefunden', partial: '{found} gefunden (bis Seite {page}).',
     done: 'Fertig: {found} gefunden.', autoPaused: 'Automatisches Laden nach {limit} Ergebnissen pausiert; mit „Mehr laden“ geht es weiter.', error: 'Fehler: {error} ({found} bisher gefunden)',
+    tipMinChapters: 'Blendet Bücher mit weniger Kapiteln aus.', tipMaxChapters: 'Blendet Bücher mit mehr Kapiteln aus.', tipMinScore: 'Blendet Bücher mit niedrigerer Bewertung aus (0–5).', tipKeepUnrated: 'Zeigt bei einer Mindestbewertung trotzdem Bücher, die noch niemand bewertet hat.', tipPublishedSince: 'Zeigt nur Bücher, die an oder nach diesem Datum veröffentlicht wurden.', tipWithTags: 'Tags durch Kommas getrennt. AND: das Buch braucht alle. OR: einer reicht.', tipOnlyCategories: 'Kategorien durch Kommas getrennt; zeigt nur Bücher daraus.', tipWithoutTags: 'Tags durch Kommas getrennt; blendet Bücher aus, die einen davon haben.', tipWithoutWords: 'Wörter durch Kommas getrennt; blendet Bücher aus, die sie im Titel oder in der Beschreibung erwähnen.', tipWithoutAuthors: 'Exakte Autorennamen durch Kommas getrennt; blendet deren Bücher aus.', tipWithoutCategories: 'Kategorien durch Kommas getrennt; blendet Bücher daraus aus.', tipHideInLibrary: 'Blendet Bücher aus, die schon in deiner Bibliothek sind.', tipMaxPages: 'Wie viele Seiten der Website höchstens pro Ladevorgang durchsucht werden.',
   },
   id: {
     groupBook: 'Bab, skor & tanggal', groupShowOnly: 'Tampilkan hanya', groupHide: 'Sembunyikan',
@@ -59,6 +64,7 @@ const I18N = {
     searching: 'Mencari…', noToken: 'Cookie _csrfToken tidak ada; muat ulang halaman.',
     progress: 'Halaman {page}… {found} ditemukan', partial: '{found} ditemukan (sampai halaman {page}).',
     done: 'Selesai: {found} ditemukan.', autoPaused: 'Pemuatan otomatis dijeda setelah {limit} hasil; gunakan "Muat lebih banyak" untuk melanjutkan.', error: 'Kesalahan: {error} ({found} ditemukan sejauh ini)',
+    tipMinChapters: 'Sembunyikan buku dengan bab lebih sedikit dari angka ini.', tipMaxChapters: 'Sembunyikan buku dengan bab lebih banyak dari angka ini.', tipMinScore: 'Sembunyikan buku dengan skor di bawah ini (0–5).', tipKeepUnrated: 'Dengan skor minimum, tetap tampilkan buku yang belum dinilai siapa pun.', tipPublishedSince: 'Hanya tampilkan buku yang terbit pada tanggal ini atau sesudahnya.', tipWithTags: 'Tag dipisahkan koma. AND: buku harus punya semuanya. OR: cukup satu.', tipOnlyCategories: 'Kategori dipisahkan koma; hanya tampilkan buku dari kategori ini.', tipWithoutTags: 'Tag dipisahkan koma; sembunyikan buku yang punya salah satunya.', tipWithoutWords: 'Kata dipisahkan koma; sembunyikan buku yang menyebutnya di judul atau deskripsi.', tipWithoutAuthors: 'Nama penulis persis, dipisahkan koma; sembunyikan buku mereka.', tipWithoutCategories: 'Kategori dipisahkan koma; sembunyikan buku dari kategori ini.', tipHideInLibrary: 'Sembunyikan buku yang sudah ada di pustaka Anda.', tipMaxPages: 'Jumlah maksimum halaman situs yang diperiksa setiap kali hasil dimuat.',
   },
   ms: {
     groupBook: 'Bab, skor & tarikh', groupShowOnly: 'Tunjukkan sahaja', groupHide: 'Sembunyikan',
@@ -69,6 +75,7 @@ const I18N = {
     searching: 'Mencari…', noToken: 'Kuki _csrfToken tiada; muat semula halaman.',
     progress: 'Halaman {page}… {found} dijumpai', partial: '{found} dijumpai (sehingga halaman {page}).',
     done: 'Selesai: {found} dijumpai.', autoPaused: 'Pemuatan automatik dijeda selepas {limit} hasil; gunakan "Muat lagi" untuk teruskan.', error: 'Ralat: {error} ({found} dijumpai setakat ini)',
+    tipMinChapters: 'Sembunyikan buku dengan bab kurang daripada nombor ini.', tipMaxChapters: 'Sembunyikan buku dengan bab lebih daripada nombor ini.', tipMinScore: 'Sembunyikan buku dengan skor di bawah ini (0–5).', tipKeepUnrated: 'Dengan skor minimum, tetap tunjukkan buku yang belum dinilai sesiapa.', tipPublishedSince: 'Tunjukkan hanya buku yang diterbitkan pada tarikh ini atau selepasnya.', tipWithTags: 'Tag dipisahkan dengan koma. AND: buku mesti ada semuanya. OR: satu sudah cukup.', tipOnlyCategories: 'Kategori dipisahkan dengan koma; tunjukkan hanya buku daripada kategori ini.', tipWithoutTags: 'Tag dipisahkan dengan koma; sembunyikan buku yang ada salah satunya.', tipWithoutWords: 'Perkataan dipisahkan dengan koma; sembunyikan buku yang menyebutnya dalam tajuk atau penerangan.', tipWithoutAuthors: 'Nama pengarang tepat, dipisahkan dengan koma; sembunyikan buku mereka.', tipWithoutCategories: 'Kategori dipisahkan dengan koma; sembunyikan buku daripada kategori ini.', tipHideInLibrary: 'Sembunyikan buku yang sudah ada dalam perpustakaan anda.', tipMaxPages: 'Bilangan maksimum halaman laman web yang diperiksa setiap kali hasil dimuatkan.',
   },
   it: {
     groupBook: 'Capitoli, voto e data', groupShowOnly: 'Mostra solo', groupHide: 'Nascondi',
@@ -79,6 +86,7 @@ const I18N = {
     searching: 'Ricerca…', noToken: 'Manca il cookie _csrfToken; ricarica la pagina.',
     progress: 'Pagina {page}… {found} trovati', partial: '{found} trovati (fino alla pagina {page}).',
     done: 'Fine: {found} trovati.', autoPaused: 'Caricamento automatico in pausa dopo {limit} risultati; usa "Carica altri" per continuare.', error: 'Errore: {error} ({found} trovati finora)',
+    tipMinChapters: 'Nasconde i libri con meno capitoli di questo numero.', tipMaxChapters: 'Nasconde i libri con più capitoli di questo numero.', tipMinScore: 'Nasconde i libri con voto inferiore a questo (0–5).', tipKeepUnrated: 'Con un voto minimo, mostra comunque i libri che nessuno ha ancora votato.', tipPublishedSince: 'Mostra solo i libri pubblicati in questa data o dopo.', tipWithTags: 'Tag separati da virgole. AND: il libro deve averli tutti. OR: ne basta uno.', tipOnlyCategories: 'Categorie separate da virgole; mostra solo libri di queste.', tipWithoutTags: 'Tag separati da virgole; nasconde i libri che ne hanno almeno uno.', tipWithoutWords: 'Parole separate da virgole; nasconde i libri che le citano nel titolo o nella descrizione.', tipWithoutAuthors: 'Nomi esatti degli autori separati da virgole; nasconde i loro libri.', tipWithoutCategories: 'Categorie separate da virgole; nasconde i libri di queste.', tipHideInLibrary: 'Nasconde i libri già aggiunti alla tua libreria.', tipMaxPages: 'Quante pagine del sito controllare al massimo ogni volta che si caricano i risultati.',
   },
   ja: {
     groupBook: '話数・評価・公開日', groupShowOnly: '表示する条件', groupHide: '非表示にする条件',
@@ -89,6 +97,7 @@ const I18N = {
     searching: '検索中…', noToken: '_csrfToken クッキーがありません。ページを再読み込みしてください。',
     progress: '{page} ページ目… {found} 件', partial: '{found} 件（{page} ページまで）',
     done: '完了：{found} 件', autoPaused: '{limit} 件で自動読み込みを停止しました。続けるには「さらに読み込む」を押してください。', error: 'エラー：{error}（ここまで {found} 件）',
+    tipMinChapters: 'この話数より少ない作品を隠します。', tipMaxChapters: 'この話数より多い作品を隠します。', tipMinScore: 'この評価（0〜5）より低い作品を隠します。', tipKeepUnrated: '最低評価を設定しても、まだ誰も評価していない作品は表示します。', tipPublishedSince: 'この日付以降に公開された作品だけを表示します。', tipWithTags: 'タグをカンマ区切りで入力。AND：すべて必要。OR：どれか1つでよい。', tipOnlyCategories: 'カテゴリーをカンマ区切りで入力。これらの作品だけを表示します。', tipWithoutTags: 'タグをカンマ区切りで入力。どれか1つでも持つ作品を隠します。', tipWithoutWords: '単語をカンマ区切りで入力。タイトルや説明に含む作品を隠します。', tipWithoutAuthors: '作者名（完全一致）をカンマ区切りで入力。その作品を隠します。', tipWithoutCategories: 'カテゴリーをカンマ区切りで入力。これらの作品を隠します。', tipHideInLibrary: 'ライブラリに追加済みの作品を隠します。', tipMaxPages: '結果を読み込むたびに確認するサイトの最大ページ数です。',
   },
   ko: {
     groupBook: '회차·평점·날짜', groupShowOnly: '이것만 표시', groupHide: '숨기기',
@@ -99,6 +108,7 @@ const I18N = {
     searching: '검색 중…', noToken: '_csrfToken 쿠키가 없습니다. 페이지를 새로고침하세요.',
     progress: '{page}페이지… {found}개 찾음', partial: '{found}개 찾음 ({page}페이지까지).',
     done: '완료: {found}개 찾음.', autoPaused: '{limit}개 이후 자동 불러오기가 일시 중지되었습니다. 계속하려면 "더 보기"를 누르세요.', error: '오류: {error} (지금까지 {found}개 찾음)',
+    tipMinChapters: '이 회차 수보다 적은 작품을 숨깁니다.', tipMaxChapters: '이 회차 수보다 많은 작품을 숨깁니다.', tipMinScore: '이 평점(0–5)보다 낮은 작품을 숨깁니다.', tipKeepUnrated: '최소 평점을 정해도 아직 아무도 평가하지 않은 작품은 표시합니다.', tipPublishedSince: '이 날짜 또는 이후에 게시된 작품만 표시합니다.', tipWithTags: '쉼표로 구분한 태그. AND: 모두 있어야 함. OR: 하나만 있어도 됨.', tipOnlyCategories: '쉼표로 구분한 카테고리. 이 카테고리의 작품만 표시합니다.', tipWithoutTags: '쉼표로 구분한 태그. 하나라도 있는 작품을 숨깁니다.', tipWithoutWords: '쉼표로 구분한 단어. 제목이나 설명에 포함된 작품을 숨깁니다.', tipWithoutAuthors: '쉼표로 구분한 정확한 작가 이름. 해당 작가의 작품을 숨깁니다.', tipWithoutCategories: '쉼표로 구분한 카테고리. 이 카테고리의 작품을 숨깁니다.', tipHideInLibrary: '이미 서재에 추가한 작품을 숨깁니다.', tipMaxPages: '결과를 불러올 때마다 확인할 사이트 페이지의 최대 개수입니다.',
   },
   ru: {
     groupBook: 'Главы, оценка и дата', groupShowOnly: 'Показывать только', groupHide: 'Скрыть',
@@ -109,6 +119,7 @@ const I18N = {
     searching: 'Поиск…', noToken: 'Нет cookie _csrfToken; перезагрузите страницу.',
     progress: 'Страница {page}… найдено: {found}', partial: 'Найдено: {found} (до страницы {page}).',
     done: 'Готово: найдено {found}.', autoPaused: 'Автозагрузка приостановлена после {limit} результатов; нажмите «Загрузить ещё», чтобы продолжить.', error: 'Ошибка: {error} (пока найдено: {found})',
+    tipMinChapters: 'Скрывает книги, в которых меньше глав.', tipMaxChapters: 'Скрывает книги, в которых больше глав.', tipMinScore: 'Скрывает книги с оценкой ниже этой (0–5).', tipKeepUnrated: 'При минимальной оценке всё равно показывает книги, которые ещё никто не оценил.', tipPublishedSince: 'Показывает только книги, опубликованные в эту дату или позже.', tipWithTags: 'Теги через запятую. AND: нужны все. OR: достаточно одного.', tipOnlyCategories: 'Категории через запятую; показывает только книги из них.', tipWithoutTags: 'Теги через запятую; скрывает книги, у которых есть любой из них.', tipWithoutWords: 'Слова через запятую; скрывает книги, где они встречаются в названии или описании.', tipWithoutAuthors: 'Точные имена авторов через запятую; скрывает их книги.', tipWithoutCategories: 'Категории через запятую; скрывает книги из них.', tipHideInLibrary: 'Скрывает книги, уже добавленные в вашу библиотеку.', tipMaxPages: 'Сколько страниц сайта максимум просматривать при каждой загрузке результатов.',
   },
   th: {
     groupBook: 'จำนวนตอน คะแนน และวันที่', groupShowOnly: 'แสดงเฉพาะ', groupHide: 'ซ่อน',
@@ -119,6 +130,7 @@ const I18N = {
     searching: 'กำลังค้นหา…', noToken: 'ไม่พบคุกกี้ _csrfToken โปรดโหลดหน้าใหม่',
     progress: 'หน้า {page}… พบ {found} เรื่อง', partial: 'พบ {found} เรื่อง (ถึงหน้า {page})',
     done: 'เสร็จสิ้น: พบ {found} เรื่อง', autoPaused: 'หยุดโหลดอัตโนมัติหลังจาก {limit} รายการ กด "โหลดเพิ่ม" เพื่อดำเนินการต่อ', error: 'ข้อผิดพลาด: {error} (พบแล้ว {found} เรื่อง)',
+    tipMinChapters: 'ซ่อนเรื่องที่มีจำนวนตอนน้อยกว่านี้', tipMaxChapters: 'ซ่อนเรื่องที่มีจำนวนตอนมากกว่านี้', tipMinScore: 'ซ่อนเรื่องที่มีคะแนนต่ำกว่านี้ (0–5)', tipKeepUnrated: 'เมื่อกำหนดคะแนนขั้นต่ำ ยังคงแสดงเรื่องที่ยังไม่มีใครให้คะแนน', tipPublishedSince: 'แสดงเฉพาะเรื่องที่เผยแพร่ในวันนี้หรือหลังจากนั้น', tipWithTags: 'แท็กคั่นด้วยจุลภาค AND: ต้องมีครบทุกแท็ก OR: มีแท็กเดียวก็พอ', tipOnlyCategories: 'หมวดหมู่คั่นด้วยจุลภาค แสดงเฉพาะเรื่องในหมวดหมู่เหล่านี้', tipWithoutTags: 'แท็กคั่นด้วยจุลภาค ซ่อนเรื่องที่มีแท็กใดแท็กหนึ่ง', tipWithoutWords: 'คำคั่นด้วยจุลภาค ซ่อนเรื่องที่มีคำเหล่านี้ในชื่อหรือคำอธิบาย', tipWithoutAuthors: 'ชื่อผู้เขียนแบบตรงทุกตัวอักษร คั่นด้วยจุลภาค ซ่อนเรื่องของผู้เขียนเหล่านี้', tipWithoutCategories: 'หมวดหมู่คั่นด้วยจุลภาค ซ่อนเรื่องในหมวดหมู่เหล่านี้', tipHideInLibrary: 'ซ่อนเรื่องที่คุณเพิ่มไว้ในคลังแล้ว', tipMaxPages: 'จำนวนหน้าสูงสุดของเว็บที่จะตรวจในแต่ละครั้งที่โหลดผลลัพธ์',
   },
   tr: {
     groupBook: 'Bölüm, puan ve tarih', groupShowOnly: 'Yalnızca göster', groupHide: 'Gizle',
@@ -129,6 +141,7 @@ const I18N = {
     searching: 'Aranıyor…', noToken: '_csrfToken çerezi yok; sayfayı yenileyin.',
     progress: 'Sayfa {page}… {found} bulundu', partial: '{found} bulundu ({page}. sayfaya kadar).',
     done: 'Bitti: {found} bulundu.', autoPaused: 'Otomatik yükleme {limit} sonuçtan sonra duraklatıldı; devam etmek için "Daha fazla yükle" düğmesini kullanın.', error: 'Hata: {error} (şu ana kadar {found} bulundu)',
+    tipMinChapters: 'Bu sayıdan az bölümü olan kitapları gizler.', tipMaxChapters: 'Bu sayıdan fazla bölümü olan kitapları gizler.', tipMinScore: 'Bu puanın (0–5) altındaki kitapları gizler.', tipKeepUnrated: 'Minimum puan varken bile henüz kimsenin puanlamadığı kitapları gösterir.', tipPublishedSince: 'Yalnızca bu tarihte veya sonrasında yayınlanan kitapları gösterir.', tipWithTags: 'Virgülle ayrılmış etiketler. AND: hepsi gerekli. OR: biri yeterli.', tipOnlyCategories: 'Virgülle ayrılmış kategoriler; yalnızca bu kategorilerdeki kitapları gösterir.', tipWithoutTags: 'Virgülle ayrılmış etiketler; bunlardan birine sahip kitapları gizler.', tipWithoutWords: 'Virgülle ayrılmış kelimeler; başlıkta veya açıklamada geçen kitapları gizler.', tipWithoutAuthors: 'Virgülle ayrılmış tam yazar adları; kitaplarını gizler.', tipWithoutCategories: 'Virgülle ayrılmış kategoriler; bu kategorilerdeki kitapları gizler.', tipHideInLibrary: 'Kitaplığınıza zaten eklediğiniz kitapları gizler.', tipMaxPages: 'Sonuçlar her yüklendiğinde en fazla kaç site sayfasının taranacağı.',
   },
   vi: {
     groupBook: 'Số chương, điểm và ngày', groupShowOnly: 'Chỉ hiển thị', groupHide: 'Ẩn',
@@ -139,6 +152,7 @@ const I18N = {
     searching: 'Đang tìm…', noToken: 'Thiếu cookie _csrfToken; hãy tải lại trang.',
     progress: 'Trang {page}… tìm thấy {found}', partial: 'Tìm thấy {found} (đến trang {page}).',
     done: 'Xong: tìm thấy {found}.', autoPaused: 'Đã tạm dừng tự động tải sau {limit} kết quả; bấm "Tải thêm" để tiếp tục.', error: 'Lỗi: {error} (đã tìm thấy {found})',
+    tipMinChapters: 'Ẩn truyện có ít chương hơn số này.', tipMaxChapters: 'Ẩn truyện có nhiều chương hơn số này.', tipMinScore: 'Ẩn truyện có điểm thấp hơn mức này (0–5).', tipKeepUnrated: 'Khi đặt điểm tối thiểu, vẫn hiển thị truyện chưa ai chấm điểm.', tipPublishedSince: 'Chỉ hiển thị truyện đăng vào ngày này hoặc sau đó.', tipWithTags: 'Các thẻ cách nhau bằng dấu phẩy. AND: cần có tất cả. OR: chỉ cần một.', tipOnlyCategories: 'Các thể loại cách nhau bằng dấu phẩy; chỉ hiển thị truyện thuộc các thể loại này.', tipWithoutTags: 'Các thẻ cách nhau bằng dấu phẩy; ẩn truyện có bất kỳ thẻ nào trong số đó.', tipWithoutWords: 'Các từ cách nhau bằng dấu phẩy; ẩn truyện nhắc đến chúng trong tên hoặc mô tả.', tipWithoutAuthors: 'Tên tác giả chính xác, cách nhau bằng dấu phẩy; ẩn truyện của họ.', tipWithoutCategories: 'Các thể loại cách nhau bằng dấu phẩy; ẩn truyện thuộc các thể loại này.', tipHideInLibrary: 'Ẩn truyện bạn đã thêm vào thư viện.', tipMaxPages: 'Số trang tối đa của trang web cần quét mỗi lần tải kết quả.',
   },
   zh: {
     groupBook: '章節、評分與日期', groupShowOnly: '僅顯示', groupHide: '隱藏',
@@ -149,6 +163,7 @@ const I18N = {
     searching: '搜尋中…', noToken: '缺少 _csrfToken cookie，請重新整理頁面。',
     progress: '第 {page} 頁… 已找到 {found} 本', partial: '已找到 {found} 本（至第 {page} 頁）。',
     done: '完成：共找到 {found} 本。', autoPaused: '已載入 {limit} 筆，自動載入已暫停；請按「載入更多」繼續。', error: '錯誤：{error}（目前已找到 {found} 本）',
+    tipMinChapters: '隱藏章節數少於此數字的作品。', tipMaxChapters: '隱藏章節數多於此數字的作品。', tipMinScore: '隱藏評分低於此分數（0–5）的作品。', tipKeepUnrated: '設定最低評分時，仍顯示尚未有人評分的作品。', tipPublishedSince: '只顯示在此日期或之後發布的作品。', tipWithTags: '以逗號分隔的標籤。AND：必須全部符合。OR：符合其一即可。', tipOnlyCategories: '以逗號分隔的分類；只顯示這些分類的作品。', tipWithoutTags: '以逗號分隔的標籤；隱藏含有其中任一標籤的作品。', tipWithoutWords: '以逗號分隔的關鍵字；隱藏標題或簡介中提到它們的作品。', tipWithoutAuthors: '以逗號分隔的完整作者名稱；隱藏他們的作品。', tipWithoutCategories: '以逗號分隔的分類；隱藏這些分類的作品。', tipHideInLibrary: '隱藏已加入書架的作品。', tipMaxPages: '每次載入結果時最多掃描的網站頁數。',
   },
   fil: {
     groupBook: 'Kabanata, score at petsa', groupShowOnly: 'Ipakita lang', groupHide: 'Itago',
@@ -159,6 +174,7 @@ const I18N = {
     searching: 'Naghahanap…', noToken: 'Walang _csrfToken cookie; i-reload ang pahina.',
     progress: 'Pahina {page}… {found} ang nahanap', partial: '{found} ang nahanap (hanggang pahina {page}).',
     done: 'Tapos na: {found} ang nahanap.', autoPaused: 'Naka-pause ang awtomatikong pag-load pagkatapos ng {limit} resulta; gamitin ang "Mag-load pa" para magpatuloy.', error: 'Error: {error} ({found} ang nahanap sa ngayon)',
+    tipMinChapters: 'Itago ang mga aklat na may mas kaunting kabanata kaysa rito.', tipMaxChapters: 'Itago ang mga aklat na may mas maraming kabanata kaysa rito.', tipMinScore: 'Itago ang mga aklat na mas mababa ang score kaysa rito (0–5).', tipKeepUnrated: 'Kahit may minimum na score, ipakita pa rin ang mga aklat na wala pang nagbigay ng rating.', tipPublishedSince: 'Ipakita lang ang mga aklat na inilathala sa petsang ito o pagkatapos.', tipWithTags: 'Mga tag na pinaghihiwalay ng kuwit. AND: kailangan lahat. OR: sapat na ang isa.', tipOnlyCategories: 'Mga kategoryang pinaghihiwalay ng kuwit; ipakita lang ang mga aklat mula rito.', tipWithoutTags: 'Mga tag na pinaghihiwalay ng kuwit; itago ang mga aklat na may alinman sa mga ito.', tipWithoutWords: 'Mga salitang pinaghihiwalay ng kuwit; itago ang mga aklat na bumabanggit sa mga ito sa pamagat o paglalarawan.', tipWithoutAuthors: 'Eksaktong pangalan ng mga may-akda, pinaghihiwalay ng kuwit; itago ang kanilang mga aklat.', tipWithoutCategories: 'Mga kategoryang pinaghihiwalay ng kuwit; itago ang mga aklat mula rito.', tipHideInLibrary: 'Itago ang mga aklat na naidagdag mo na sa iyong library.', tipMaxPages: 'Pinakamaraming pahina ng site na susuriin tuwing maglo-load ng resulta.',
   },
 };
 

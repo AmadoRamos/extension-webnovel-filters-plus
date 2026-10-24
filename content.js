@@ -3,6 +3,7 @@ const hideSiteList = on => document.querySelector('.j_category_wrapper')?.toggle
 
 const ui = pageLanguage(location.pathname);
 const t = (key, vars) => translate(ui, key, vars);
+const tip = key => `title="${t(key).replace(/"/g, '&quot;')}"`; // native tooltip on hover
 
 const panel = document.createElement('section');
 panel.id = 'wnf-panel';
@@ -11,29 +12,29 @@ panel.innerHTML = `
   <form>
     <fieldset>
       <legend>${t('groupBook')}</legend>
-      <label>${t('minChapters')} <input name="minChapters" type="number" min="0"></label>
-      <label>${t('maxChapters')} <input name="maxChapters" type="number" min="0"></label>
+      <label ${tip('tipMinChapters')}>${t('minChapters')} <input name="minChapters" type="number" min="0"></label>
+      <label ${tip('tipMaxChapters')}>${t('maxChapters')} <input name="maxChapters" type="number" min="0"></label>
       <div class="wnf-field">
-        <label>${t('minScore')} <input name="minScore" type="number" min="0" max="5" step="0.1"></label>
-        <label class="wnf-check"><input name="keepUnrated" type="checkbox"> ${t('keepUnrated')}</label>
+        <label ${tip('tipMinScore')}>${t('minScore')} <input name="minScore" type="number" min="0" max="5" step="0.1"></label>
+        <label class="wnf-check" ${tip('tipKeepUnrated')}><input name="keepUnrated" type="checkbox"> ${t('keepUnrated')}</label>
       </div>
-      <label>${t('publishedSince')} <input name="publishedAfter" type="date"></label>
+      <label ${tip('tipPublishedSince')}>${t('publishedSince')} <input name="publishedAfter" type="date"></label>
     </fieldset>
     <fieldset>
       <legend>${t('groupShowOnly')}</legend>
-      <label><span class="wnf-row">${t('withTags')} <select name="includeMode" aria-label="${t('withTags')}"><option value="all">${t('tagsAll')}</option><option value="any">${t('tagsAny')}</option></select></span><input name="includeTags" placeholder="magic, isekai"></label>
-      <label>${t('onlyCategories')} <input name="includeCategories"></label>
+      <label ${tip('tipWithTags')}><span class="wnf-row">${t('withTags')} <select name="includeMode" aria-label="${t('withTags')}"><option value="all">${t('tagsAll')}</option><option value="any">${t('tagsAny')}</option></select></span><input name="includeTags" placeholder="magic, isekai"></label>
+      <label ${tip('tipOnlyCategories')}>${t('onlyCategories')} <input name="includeCategories"></label>
     </fieldset>
     <fieldset>
       <legend>${t('groupHide')}</legend>
-      <label>${t('withoutTags')} <input name="excludeTags" placeholder="r18, harem"></label>
-      <label>${t('withoutWords')} <input name="excludeWords" placeholder="naruto, pokemon"></label>
-      <label>${t('withoutAuthors')} <input name="excludeAuthors" placeholder="author1, author2"></label>
-      <label>${t('withoutCategories')} <input name="excludeCategories"></label>
-      <label class="wnf-check wnf-wide"><input name="hideInLibrary" type="checkbox"> ${t('hideInLibrary')}</label>
+      <label ${tip('tipWithoutTags')}>${t('withoutTags')} <input name="excludeTags" placeholder="r18, harem"></label>
+      <label ${tip('tipWithoutWords')}>${t('withoutWords')} <input name="excludeWords" placeholder="naruto, pokemon"></label>
+      <label ${tip('tipWithoutAuthors')}>${t('withoutAuthors')} <input name="excludeAuthors" placeholder="author1, author2"></label>
+      <label ${tip('tipWithoutCategories')}>${t('withoutCategories')} <input name="excludeCategories"></label>
+      <label class="wnf-check wnf-wide" ${tip('tipHideInLibrary')}><input name="hideInLibrary" type="checkbox"> ${t('hideInLibrary')}</label>
     </fieldset>
     <div class="wnf-actions">
-      <label>${t('maxPages')} <input name="maxPages" type="number" min="1" max="50" value="10"></label>
+      <label ${tip('tipMaxPages')}>${t('maxPages')} <input name="maxPages" type="number" min="1" max="50" value="10"></label>
       <button type="submit">${t('search')}</button>
       <button type="button" class="wnf-reset" hidden>${t('showOriginal')}</button>
     </div>
