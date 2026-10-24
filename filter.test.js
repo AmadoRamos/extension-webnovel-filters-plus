@@ -94,3 +94,15 @@ test('mergeRecent moves seen names to the end and keeps only the newest max', ()
   assert.deepEqual(mergeRecent(['a', 'b', 'c'], ['b', 'd'], 10), ['a', 'c', 'b', 'd']);
   assert.deepEqual(mergeRecent(['a', 'b', 'c'], ['d', 'e'], 3), ['c', 'd', 'e']);
 });
+
+test('keepUnrated lets books without a score through the minScore filter', () => {
+  const unrated = { ...book, totalScore: 0 };
+  assert.equal(matches(unrated, { minScore: 4 }), false);
+  assert.equal(matches(unrated, { minScore: 4, keepUnrated: true }), true);
+  assert.equal(matches({ ...book, totalScore: undefined }, { minScore: 4, keepUnrated: true }), true);
+  assert.equal(matches({ ...book, totalScore: 3.2 }, { minScore: 4, keepUnrated: true }), false); // rated but too low
+});
+
+test('a missing score counts as unrated, so minScore rejects it unless keepUnrated', () => {
+  assert.equal(matches({ ...book, totalScore: undefined }, { minScore: 4 }), false);
+});

@@ -7,7 +7,7 @@ Chrome/Brave extension that adds extra filters to [webnovel.com](https://www.web
 WebNovel only loads 20 books at a time, so the extension goes through the category's pages and shows only the books that match your filters. Like the site's own list, it loads in batches: when you reach the end of the results it searches the next pages (or click **Load more**). After 500 results it stops loading on its own and waits for a click, so the page stays light. Available filters:
 
 - Minimum and maximum chapters
-- Minimum score
+- Minimum score, optionally keeping books nobody has rated yet
 - Published on or after a date
 - Tags the book must have (all of them with AND, or at least one with OR) and tags it must not have (any of them), in Spanish or English
 - Words to exclude from the title or description

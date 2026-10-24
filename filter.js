@@ -4,7 +4,8 @@ const hasName = (names, value) => names.some(n => n.trim().toLowerCase() === Str
 function matches(book, f) {
   if (f.minChapters != null && book.chapterNum < f.minChapters) return false;
   if (f.maxChapters != null && book.chapterNum > f.maxChapters) return false;
-  if (f.minScore != null && book.totalScore < f.minScore) return false;
+  const unrated = !(book.totalScore > 0); // the site reports 0 for books nobody has rated yet
+  if (f.minScore != null && !(f.keepUnrated && unrated) && !(book.totalScore >= f.minScore)) return false;
 
   const tags = new Set((book.tagInfo || []).flatMap(t => [t.tagName, t.enTagName]).map(s => String(s).toLowerCase()));
   const has = tag => tags.has(tag.toLowerCase());

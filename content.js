@@ -12,6 +12,7 @@ panel.innerHTML = `
     <label>${t('minChapters')} <input name="minChapters" type="number" min="0"></label>
     <label>${t('maxChapters')} <input name="maxChapters" type="number" min="0"></label>
     <label>${t('minScore')} <input name="minScore" type="number" min="0" max="5" step="0.1"></label>
+    <label class="wnf-check"><input name="keepUnrated" type="checkbox"> ${t('keepUnrated')}</label>
     <label>${t('publishedSince')} <input name="publishedAfter" type="date"></label>
     <label><span class="wnf-row">${t('withTags')} <select name="includeMode" aria-label="${t('withTags')}"><option value="all">${t('tagsAll')}</option><option value="any">${t('tagsAny')}</option></select></span><input name="includeTags" placeholder="magic, isekai"></label>
     <label>${t('withoutTags')} <input name="excludeTags" placeholder="r18, harem"></label>
@@ -71,6 +72,7 @@ function readFilters() {
     minChapters: num('minChapters'),
     maxChapters: num('maxChapters'),
     minScore: num('minScore'),
+    keepUnrated: raw.keepUnrated === 'on',
     publishedAfter: raw.publishedAfter ? new Date(`${raw.publishedAfter}T00:00`).getTime() : null, // local midnight
     includeTags: list('includeTags'),
     includeMode: raw.includeMode,
