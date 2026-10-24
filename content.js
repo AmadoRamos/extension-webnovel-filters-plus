@@ -139,7 +139,7 @@ function renderBook(b) {
 // Like the site's own list, results load in batches: the next one starts when the "Load more" button scrolls into view.
 const BATCH = 20; // matches per batch, one site page's worth
 const AUTO_LIMIT = 500; // past this many results, only a click loads more, so the page can't grow without limit
-let scan = null; // { params, filters, page, found, done, busy }
+let scan = null; // { params, filters, page, found, done, busy, shown }
 
 function showOriginal() {
   scan = null;
@@ -176,7 +176,9 @@ async function loadMore() {
         if (b.authorName) seen.authors.add(lower(b.authorName));
         if (b.categoryName) seen.categories.add(lower(b.categoryName));
       }
-      const hits = data.items.filter(b => matches(b, s.filters));
+      // the site's order can shift while scrolling (e.g. a book gets updated), so a book may come back on a later page
+      const hits = data.items.filter(b => !s.shown.has(b.bookId) && matches(b, s.filters));
+      for (const b of hits) s.shown.add(b.bookId);
       results.insertAdjacentHTML('beforeend', hits.map(renderBook).join(''));
       batchFound += hits.length;
       s.found += hits.length;
@@ -210,6 +212,6 @@ form.addEventListener('submit', e => {
   hideSiteList(true);
   reset.hidden = false;
   more.hidden = false; // visible from the start so finishing a batch never counts as "scrolled into view"
-  scan = { params: new URLSearchParams(new FormData(siteForm)), filters: readFilters(), page: 1, found: 0, done: false, busy: false };
+  scan = { params: new URLSearchParams(new FormData(siteForm)), filters: readFilters(), page: 1, found: 0, done: false, busy: false, shown: new Set() };
   loadMore();
 });
